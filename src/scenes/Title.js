@@ -31,7 +31,8 @@ class Title extends Phaser.Scene {
         }
 
         // define keys
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        cursors = this.input.keyboard.createCursorKeys(); 
+        
         // show menu text
         menuConfig.backgroundColor = 'cyan';
         menuConfig.color = '#000';
