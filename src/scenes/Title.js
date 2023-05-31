@@ -4,11 +4,6 @@ class Title extends Phaser.Scene {
     }
     
     create() {
-        // this.wall = this.add.tileSprite(0, 0, 640, 480, 'wall').setOrigin(0, 0);
-        this.wall = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
-        this.title = this.add.image(game.config.width/2, game.config.height/2, 'title').setOrigin(0.5, 0.5);
-        this.title.setDisplaySize(game.config.width, game.config.height)
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0xFFFFFF).setOrigin(0, 0);
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Courier',
@@ -49,20 +44,7 @@ class Title extends Phaser.Scene {
         this.currentTime = 0; 
         this.bestTime = game.bestTime || 0; 
 
-        // Check if there is a high score
-        if (game.bestTime === null) {
-            this.bestTimeText = this.add.text(215, 15, `BEST TIME: 0:00`, {
-                fontFamily: 'Courier',
-                fontSize: '20px',
-                color: '#ffffff'
-            });
-        } else {
-            this.bestTimeText = this.add.text(215, 15, `BEST TIME: ${this.formatTime(game.bestTime)}`, {
-                fontFamily: 'Courier',
-                fontSize: '20px',
-                color: '#ffffff'
-            });
-        }
+        
 
         this.add.text(35, 420, `Game by Gavin Concepcion. Additional help from Dominic Fanaris.`, {
             fontFamily: 'Courier',
@@ -78,13 +60,6 @@ class Title extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
-            game.settings = {
-                jumpSpeed: 5,
-                obstacleSpeed: 2,
-            }
-            this.sound.play('sfx_select');
-            this.scene.start('introScene');
-        }
+        
     }
 }
