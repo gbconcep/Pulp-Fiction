@@ -17,6 +17,8 @@ class Load extends Phaser.Scene {
         });
 
         this.load.path = './assets/';
+        this.load.image('starSpeeder', 'starSpeeder.png');
+
     }
 
     create() {

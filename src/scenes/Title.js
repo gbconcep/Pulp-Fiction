@@ -37,7 +37,7 @@ class Title extends Phaser.Scene {
         menuConfig.backgroundColor = 'cyan';
         menuConfig.color = '#000';
         directionConfig.fixedWidth = 0
-        this.add.text(game.config.width/2, game.config.height/1.4 + borderUISize + borderPadding, 'Press SPACE to start', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/3.2, game.config.height/6.5, 'Press UP key to jump', directionConfig).setOrigin(0.5);
         this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
 
@@ -61,6 +61,8 @@ class Title extends Phaser.Scene {
     }
 
     update() {
-        
+        if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
+            this.scene.start('introScene');    
+        }
     }
 }

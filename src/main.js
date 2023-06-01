@@ -1,11 +1,11 @@
 let config = {
   type: Phaser.AUTO,
-  width: 900,
-  height: 600,
+  width: 700,
+  height: 1000,
   physics: {
       default: "arcade",
       arcade: {
-          debug: false
+          debug: true
       }
   },
   scene: [Load, Title, Intro, Time, Stealth]
