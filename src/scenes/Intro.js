@@ -2,7 +2,10 @@ class Intro extends Phaser.Scene {
   constructor() {
     super("introScene");
   }
-  
+
+  preload() {
+    this.load.image('white-car', './assets/white-car.png');
+  }
   create() {
 
     let menuConfig = {
@@ -18,7 +21,7 @@ class Intro extends Phaser.Scene {
     }
     this.add.text(game.config.width/2, game.config.height/1.4, 'Level 1: The Drive\n\nSPACE to continue', menuConfig).setOrigin(0.5);
 
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'starSpeeder').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'white-car').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  // ditto for worldbounds
     this.playerCar.body.onOverlap = true;      // ditto for overlap

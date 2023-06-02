@@ -40,26 +40,14 @@ class Title extends Phaser.Scene {
         menuConfig.color = '#000';
         directionConfig.fixedWidth = 0
 
-        this.add.text(game.config.width/2, game.config.height/1.4 + borderUISize + borderPadding, 'Press SPACE to start', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', menuConfig).setOrigin(0.5);
         // this.add.text(game.config.width/3.2, game.config.height/6.5, 'Press UP key to jump', directionConfig).setOrigin(0.5);
         // this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
 
-        this.add.text(35, 420, `Game by Alex Groff and Gavin Concepcion`) {
+        this.add.text(35, 420, `Game by Alex Groff and Gavin Concepcion`) 
         this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/3.2, game.config.height/6.5, 'Press UP key to jump', directionConfig).setOrigin(0.5);
         this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
-
-        // Initialize variables
-        this.currentTime = 0; 
-        this.bestTime = game.bestTime || 0; 
-
-        
-
-        this.add.text(35, 420, `Game by Gavin Concepcion. Additional help from Dominic Fanaris.`, {
-            fontFamily: 'Courier',
-            fontSize: '15px',
-            color: '#ffffff'
-        });
 
         this.add.text(125, 440, `Music and sound effects from Freesound.org`, {
             fontFamily: 'Courier',
@@ -73,5 +61,4 @@ class Title extends Phaser.Scene {
             this.scene.start('introScene');    
         }
     }
-}
 }
