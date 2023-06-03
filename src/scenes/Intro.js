@@ -5,9 +5,11 @@ class Intro extends Phaser.Scene {
 
   preload() {
     this.load.image('white-car', './assets/white-car.png');
+    this.load.image('road', './assets/road.png');
   }
-  
+
   create() {
+    this.road = this.add.tileSprite(0, 0, 600, 400, 'road').setOrigin(0,0);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -78,7 +80,7 @@ class Intro extends Phaser.Scene {
       this.scene.start('timeScene');
     }, this);
 
-
+    this.road.tilePositionY += 2;
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
       this.scene.start('timeScene');    

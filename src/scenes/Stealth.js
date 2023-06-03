@@ -5,9 +5,12 @@ class Stealth extends Phaser.Scene {
 
   preload() {
     this.load.image('blood-car', './assets/blood-car.png');
+    this.load.image('road', './assets/road.png');
   }
   
   create() {
+    this.road = this.add.tileSprite(0, 0, 600, 400, 'road').setOrigin(0,0);
+
     let menuConfig = {
       fontFamily: 'Arial',
       fontSize: '20px',
@@ -76,6 +79,8 @@ class Stealth extends Phaser.Scene {
       // start next scene
       this.scene.start('titleScene');
     }, this);
+
+    this.road.tilePositionY += 2;
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
       this.scene.start('titleScene');    
