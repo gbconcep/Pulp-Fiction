@@ -2,9 +2,12 @@ class Stealth extends Phaser.Scene {
   constructor() {
     super("stealthScene");
   }
+
+  preload() {
+    this.load.image('blood-car', './assets/blood-car.png');
+  }
   
   create() {
-
     let menuConfig = {
       fontFamily: 'Arial',
       fontSize: '20px',
@@ -18,7 +21,7 @@ class Stealth extends Phaser.Scene {
     }
     this.add.text(game.config.width/2, game.config.height/1.4, 'Level 3: Undercover\n\nSPACE to continue', menuConfig).setOrigin(0.5);
 
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'starSpeeder').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'blood-car').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  // ditto for worldbounds
     this.playerCar.body.onOverlap = true;      // ditto for overlap

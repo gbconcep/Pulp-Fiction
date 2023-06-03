@@ -6,6 +6,7 @@ class Intro extends Phaser.Scene {
   preload() {
     this.load.image('white-car', './assets/white-car.png');
   }
+  
   create() {
 
     let menuConfig = {
