@@ -37,7 +37,7 @@ class Stealth extends Phaser.Scene {
     this.SHIP_VELOCITY = 50;
 
 
-    // Asteroid belt objects
+    // Collision detection
     this.carGroup = this.add.group({
       runChildUpdate: true    // make sure update runs on group children
     });
