@@ -9,7 +9,7 @@ class Intro extends Phaser.Scene {
   }
 
   create() {
-    this.road = this.add.tileSprite(0, 0, 600, 400, 'road').setOrigin(0,0);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -30,10 +30,9 @@ class Intro extends Phaser.Scene {
     this.playerCar.body.onOverlap = true;      // ditto for overlap
     this.playerCar.setDebugBodyColor(0xFFFF00);
     this.playerCar.setCollideWorldBounds(true);
-    this.playerCar.setMaxVelocity(250, 430);
+    this.playerCar.setMaxVelocity(250, 430).setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setBounceY(.3);
-    this.playerCar.setDrag(900);
+    this.playerCar.setScale(2.5);
     this.playerCar.body.onOverlap = true;
     this.SHIP_VELOCITY = 50;
 

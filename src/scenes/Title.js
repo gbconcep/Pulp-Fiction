@@ -6,12 +6,8 @@ class Title extends Phaser.Scene {
 
     preload() {
         this.load.image('logo', './assets/pulp-fiction-logo.png');
-      }
+    }
     
-    
-    preload() {
-        this.load.image('logo', './assets/pulp-fiction-logo.png');
-      }
     
     create() {
         this.add.text(game.config.width/2.4, game.config.width/2, "PULP FICTION");
