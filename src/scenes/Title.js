@@ -3,6 +3,12 @@ class Title extends Phaser.Scene {
       super("titleScene");
     }
 
+
+    preload() {
+        this.load.image('logo', './assets/pulp-fiction-logo.png');
+      }
+    
+    
     preload() {
         this.load.image('logo', './assets/pulp-fiction-logo.png');
       }
@@ -10,7 +16,8 @@ class Title extends Phaser.Scene {
     create() {
         this.add.text(game.config.width/2.4, game.config.width/2, "PULP FICTION");
 
-        // this.add.image(game.config.width/2.4, game.config.width/2, 'logo')
+        this.logo = this.add.sprite(game.config.width/2, game.config.width/2, 'logo').setOrigin(.5)
+        this.logo.setScale(.5)
 
         // menu text configuration
         let menuConfig = {

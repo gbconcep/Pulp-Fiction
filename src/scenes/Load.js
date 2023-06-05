@@ -18,6 +18,11 @@ class Load extends Phaser.Scene {
 
         this.load.path = './assets/';
         this.load.image('starSpeeder', 'starSpeeder.png');
+        this.load.image('whiteCar', 'white-car.png');
+        this.load.image('bloodCar', 'blood-car.png');
+        this.load.image('logo', 'pulp-fiction-logo.png');
+        this.load.image('redCar', 'convertible.png');
+        this.load.image('road', 'road.png');
 
     }
 
