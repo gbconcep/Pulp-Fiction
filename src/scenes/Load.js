@@ -30,6 +30,7 @@ class Load extends Phaser.Scene {
         this.load.image('orangeCar', 'orange-car.png');
         this.load.image('greenCar', 'green-car.png');
         this.load.image('aquaCar', 'aqua-car.png');
+        this.load.audio('driving', 'driving.mp3');
 
     }
 

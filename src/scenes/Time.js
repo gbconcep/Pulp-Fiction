@@ -9,6 +9,10 @@ class Time extends Phaser.Scene {
   }
   
   create() {
+    this.sfx = this.sound.add('driving');
+        this.sfx.setLoop(true);
+        this.sfx.play()
+
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0);
     
 
@@ -84,7 +88,8 @@ class Time extends Phaser.Scene {
     this.road.tilePositionY += 2;
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
-      this.scene.start('stealthScene');    
+      this.scene.start('stealthScene');
+      this.sfx.stop()      
     }
   }
 }
