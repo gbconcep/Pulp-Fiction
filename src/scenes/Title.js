@@ -2,11 +2,6 @@ class Title extends Phaser.Scene {
     constructor() {
       super("titleScene");
     }
-
-
-    preload() {
-        this.load.image('logo', './assets/pulp-fiction-logo.png');
-    }
     
     
     create() {
@@ -53,14 +48,14 @@ class Title extends Phaser.Scene {
         // this.add.text(game.config.width/3.2, game.config.height/6.5, 'Press UP key to jump', directionConfig).setOrigin(0.5);
         // this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
 
-        this.add.text(35, 420, `Game by Alex Groff and Gavin Concepcion`) 
+        this.add.text(game.config.width/2, 420, `Game by Alex Groff and Gavin Concepcion`).setOrigin(.5);
         this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', menuConfig).setOrigin(0.5);
 
-        this.add.text(125, 440, `Music and sound effects from Freesound.org`, {
+        this.add.text(game.config.width/2, 440, `Music and sound effects from Freesound.org`, {
             fontFamily: 'Courier',
             fontSize: '15px',
             color: '#ffffff'
-        });
+        }).setOrigin(.5);
     }
 
     update() {

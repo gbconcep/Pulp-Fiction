@@ -3,11 +3,7 @@ class Time extends Phaser.Scene {
     super("timeScene");
   }
 
-  preload() {
-    this.load.image('convertible', './assets/convertible.png');
-    this.load.image('road', './assets/road.png');
-  }
-  
+
   create() {
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0);
     

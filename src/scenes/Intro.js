@@ -79,7 +79,7 @@ class Intro extends Phaser.Scene {
       this.scene.start('timeScene');
     }, this);
 
-    this.road.tilePositionY += 2;
+    this.road.tilePositionY -= 2;
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
       this.scene.start('timeScene');    
