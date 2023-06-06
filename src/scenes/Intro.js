@@ -13,7 +13,7 @@ class Intro extends Phaser.Scene {
         this.sfx.setLoop(true);
         this.sfx.play()
 
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -36,9 +36,10 @@ class Intro extends Phaser.Scene {
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setMaxVelocity(250, 430).setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setScale(2.5);
+    this.playerCar.setScale(3.5);
     this.playerCar.body.onOverlap = true;
-    this.SHIP_VELOCITY = 50;
+    this.CAR_VELOCITY = 50;
+    this.speed = 2;
 
 
     // Asteroid belt objects
@@ -46,7 +47,21 @@ class Intro extends Phaser.Scene {
       runChildUpdate: true    // make sure update runs on group children
     });
 
+    //car spawner
+    this.carSpawnDelay = this.time.addEvent(
+      {   delay: 1500, 
+          callback: () => {
+            let newCar = new Car(this);
+            this.carGroup.add(newCar);
+          },
+          callbackScope: this,
+          loop: true 
+      });
+    
+    
     this.timeAlive = 0;
+    this.carInvulnerable = false;
+    this.carDamaged = false;
 
     // basically a diy tween for easing movement into the scene at startup 
     // this.speedRamp = .3;
@@ -57,6 +72,8 @@ class Intro extends Phaser.Scene {
     // Player Input
     cursors = this.input.keyboard.createCursorKeys();
 
+    
+
   }
 
 
@@ -65,31 +82,44 @@ class Intro extends Phaser.Scene {
     // player input
     this.direction = new Phaser.Math.Vector2(0);
     if(cursors.up.isDown) {
-        this.playerCar.body.velocity.y -= (this.SHIP_VELOCITY);
+        this.playerCar.body.velocity.y -= (this.CAR_VELOCITY);
     } else if(cursors.down.isDown) {
-        this.playerCar.body.velocity.y += (this.SHIP_VELOCITY);
+        this.playerCar.body.velocity.y += (this.CAR_VELOCITY);
     }
     if(cursors.left.isDown) {
-        this.playerCar.body.velocity.x -= (this.SHIP_VELOCITY);
+        this.playerCar.body.velocity.x -= (this.CAR_VELOCITY);
     } else if(cursors.right.isDown) {
-        this.playerCar.body.velocity.x += (this.SHIP_VELOCITY);
+        this.playerCar.body.velocity.x += (this.CAR_VELOCITY);
     }
     if (this.playerCar.y < game.config.height/3) this.playerCar.y = game.config.height/3;
     if (this.playerCar.y > game.config.height * 7/8) this.playerCar.y = game.config.height* 7/8;
     this.direction.normalize();
 
-    this.physics.add.collider(this.playerCar, this.carGroup, null, () => {
-      // start next scene
-      this.scene.start('timeScene');
-    }, this);
 
-    this.road.tilePositionY -= 2;
+    this.road.tilePositionY -= this.speed;
+    if (this.speed < 10)this.speed += .005
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
       this.scene.start('timeScene');
       this.sfx.stop()      
     }
 
+    if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
+    this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
+        
+  }
+
+  carCollision(object1, object2) { 
+    if (!this.carDamaged){
+        object1.y += 30;
+        this.carDamaged = true;
+        this.carInvulnerable = this.time.delayedCall(3000, () => {
+            this.carDamaged = false;
+            object1.alpha = 1;
+        }, null, this);
+    }
+    object2.destroy();
+    if (this.speed > 3) this.speed = this.speed/2;      
   }
 
 }
