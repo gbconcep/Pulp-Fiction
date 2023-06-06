@@ -23,6 +23,14 @@ class Load extends Phaser.Scene {
         this.load.image('logo', 'pulp-fiction-logo.png');
         this.load.image('redCar', 'convertible.png');
         this.load.image('road', 'road.png');
+        this.load.image('blackPolice', 'black-police.png');
+        this.load.image('bluePolice', 'blue-police.png');
+        this.load.image('purpleCar', 'purple-car.png');
+        this.load.image('yellowCar', 'yellow-car.png');
+        this.load.image('orangeCar', 'orange-car.png');
+        this.load.image('greenCar', 'green-car.png');
+        this.load.image('aquaCar', 'aqua-car.png');
+        this.load.audio('driving', 'driving.mp3');
 
     }
 

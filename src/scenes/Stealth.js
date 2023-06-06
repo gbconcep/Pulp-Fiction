@@ -9,6 +9,9 @@ class Stealth extends Phaser.Scene {
   }
   
   create() {
+    this.sfx = this.sound.add('driving');
+        this.sfx.setLoop(true);
+        this.sfx.play()
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0);
 
     let menuConfig = {
@@ -37,7 +40,7 @@ class Stealth extends Phaser.Scene {
     this.SHIP_VELOCITY = 50;
 
 
-    // Asteroid belt objects
+    // Collision detection
     this.carGroup = this.add.group({
       runChildUpdate: true    // make sure update runs on group children
     });
@@ -82,7 +85,8 @@ class Stealth extends Phaser.Scene {
     this.road.tilePositionY += 2;
 
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
-      this.scene.start('titleScene');    
+      this.scene.start('titleScene');
+      this.sfx.stop()    
     }
   }
 }
