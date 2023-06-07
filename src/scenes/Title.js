@@ -5,7 +5,6 @@ class Title extends Phaser.Scene {
     
     
     create() {
-        this.add.text(game.config.width/2.4, game.config.width/2, "PULP FICTION");
 
         this.logo = this.add.sprite(game.config.width/2, game.config.width/3, 'logo').setOrigin(.5)
         this.logo.setScale(.5)

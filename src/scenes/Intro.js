@@ -27,11 +27,14 @@ class Intro extends Phaser.Scene {
       }
     }
     this.add.text(game.config.width/2, game.config.height/1.4, 'Level 1: The Drive\n\nSPACE to continue', menuConfig).setOrigin(0.5);
+    this.distanceText = this.add.text(game.config.width/4, 50, '', menuConfig).setOrigin(0.5);
+    this.distanceRemainingText = this.add.text(game.config.width * 3/4, 50, '', menuConfig).setOrigin(0.5);
+
 
     this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'white-car').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
-    this.playerCar.body.onWorldBounds = true;  // ditto for worldbounds
-    this.playerCar.body.onOverlap = true;      // ditto for overlap
+    this.playerCar.body.onWorldBounds = true;  
+    this.playerCar.body.onOverlap = true;      
     this.playerCar.setDebugBodyColor(0xFFFF00);
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setMaxVelocity(250, 430).setBounceY(.3).setDrag(900);
@@ -60,6 +63,7 @@ class Intro extends Phaser.Scene {
     
     
     this.timeAlive = 0;
+    this.distance = 0;    
     this.carInvulnerable = false;
     this.carDamaged = false;
 
@@ -78,6 +82,10 @@ class Intro extends Phaser.Scene {
 
 
   update(){
+
+    this.distance += this.speed/10
+    this.distanceText.text = Math.floor(this.distance);
+    this.distanceRemainingText.text = Math.floor( 2500 - this.distance );
 
     // player input
     this.direction = new Phaser.Math.Vector2(0);
