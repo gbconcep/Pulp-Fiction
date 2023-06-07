@@ -2,7 +2,7 @@ class Car extends Phaser.Physics.Arcade.Sprite {
    
     constructor(scene, lane = false) {
 
-        let carAsset = 'redCar';  //Phaser.Utils.Array.GetRandom(['car1', 'car2', 'car3', 'car4']);
+        let carAsset = 'yellowCar';  //Phaser.Utils.Array.GetRandom(['car1', 'car2', 'car3', 'car4']);
         let carSpawn = lane ? lane : Phaser.Utils.Array.GetRandom([100, 300, 500, 700]);
         // call Phaser Physics Sprite constructor
         super(scene, carSpawn, -30, carAsset); 
