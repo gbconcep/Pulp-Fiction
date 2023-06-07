@@ -43,7 +43,7 @@ class Title extends Phaser.Scene {
         directionConfig.fixedWidth = 0
 
         this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', directionConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height * 2.5/4, 'Use arrow Keys to move', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height * 2.5/4, 'Use ARROW KEYS to move', directionConfig).setOrigin(0.5);
         // this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
 
         this.add.text(game.config.width/2, 500, `Game by Alex Groff and Gavin Concepcion`).setOrigin(.5);

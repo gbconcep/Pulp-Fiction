@@ -13,7 +13,7 @@ class Time extends Phaser.Scene {
 
     let menuConfig = {
       fontFamily: 'Arial',
-      fontSize: '20px',
+      fontSize: '30px',
       backgroundColor: 'cyan',
       color: 'purple',
       align: 'center',
@@ -28,7 +28,7 @@ class Time extends Phaser.Scene {
     this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5);
 
 
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'whiteCar').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'redCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  
     this.playerCar.body.onOverlap = true;      
@@ -41,7 +41,7 @@ class Time extends Phaser.Scene {
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 2;
-    this.GOAL = 2500;
+    this.GOAL = 2000;
 
 
     // Car obstacles
