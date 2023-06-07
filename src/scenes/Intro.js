@@ -74,6 +74,11 @@ class Intro extends Phaser.Scene {
     // Player Input
     cursors = this.input.keyboard.createCursorKeys();
 
+    // dialogue
+    this.script = new dialogueBoxBundle(this, [
+      ['JULES', 'So, tell me about hash.']
+    ], true)
+
   }
 
 
