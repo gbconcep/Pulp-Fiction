@@ -21,5 +21,14 @@ class Car extends Phaser.Physics.Arcade.Sprite {
         this.setScale(3);
     }
 
-    // ...
+    update() {
+
+        //this.angle += this.rotateSpeed;
+
+        // destroy paddle if it reaches the left edge of the screen
+        if(game.config.height + 100 < this.y) {
+            this.destroy();
+
+        }
+    }
 }
