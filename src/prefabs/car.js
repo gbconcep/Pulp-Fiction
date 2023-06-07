@@ -2,14 +2,14 @@ class Car extends Phaser.Physics.Arcade.Sprite {
    
     constructor(scene, lane = false) {
 
-        let carAssets = ['orangeCar', 'yellowCar', 'greenCar', 'aquaCar', 'purpleCar', 'bluePolice' , 'blackPolice'];   
+        let carAssets = ['orangeCar', 'yellowCar', 'greenCar', 'aquaCar', 'purpleCar'];   
         let carSpawn = lane ? lane : Phaser.Utils.Array.GetRandom([100, 300, 500, 700]);
 
         // Randomly select a car asset
         let carAsset = Phaser.Utils.Array.GetRandom(carAssets);
 
         // call Phaser Physics Sprite constructor
-        super(scene, carSpawn, -30, carAsset); 
+        super(scene, carSpawn + (Math.random()*80 - 40), -50, carAsset); 
         
         this.parentScene = scene;
 
@@ -18,17 +18,18 @@ class Car extends Phaser.Physics.Arcade.Sprite {
         this.parentScene.physics.add.existing(this);
         this.setVelocityY(120);
         this.setImmovable();
-        this.setScale(3);
-    }
+        this.setScale(4);
+        this.flipY = true;
+        this.body.setSize(18);
+        }
 
     update() {
 
-        //this.angle += this.rotateSpeed;
 
-        // destroy paddle if it reaches the left edge of the screen
+        // destroy car if it reaches past the bottom edge of the screen
         if(game.config.height + 100 < this.y) {
             this.destroy();
-
         }
     }
+
 }

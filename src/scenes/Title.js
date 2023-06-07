@@ -6,8 +6,7 @@ class Title extends Phaser.Scene {
     
     create() {
 
-        this.logo = this.add.sprite(game.config.width/2, game.config.width/3, 'logo').setOrigin(.5)
-        this.logo.setScale(.5)
+        this.logo = this.add.sprite(game.config.width/2, game.config.width/3, 'logo').setOrigin(.5);
 
         // menu text configuration
         let menuConfig = {
@@ -43,14 +42,13 @@ class Title extends Phaser.Scene {
         menuConfig.color = '#000';
         directionConfig.fixedWidth = 0
 
-        this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', menuConfig).setOrigin(0.5);
-        // this.add.text(game.config.width/3.2, game.config.height/6.5, 'Press UP key to jump', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height * 2.5/4, 'Use arrow Keys to move', directionConfig).setOrigin(0.5);
         // this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
 
-        this.add.text(game.config.width/2, 420, `Game by Alex Groff and Gavin Concepcion`).setOrigin(.5);
-        this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, 500, `Game by Alex Groff and Gavin Concepcion`).setOrigin(.5);
 
-        this.add.text(game.config.width/2, 440, `Music and sound effects from Freesound.org`, {
+        this.add.text(game.config.width/2, 520, `Music and sound effects from Freesound.org`, {
             fontFamily: 'Courier',
             fontSize: '15px',
             color: '#ffffff'

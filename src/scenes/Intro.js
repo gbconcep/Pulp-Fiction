@@ -3,49 +3,45 @@ class Intro extends Phaser.Scene {
     super("introScene");
   }
 
-  preload() {
-    this.load.image('white-car', './assets/white-car.png');
-    this.load.image('road', './assets/road.png');
-  }
-
   create() {
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
 
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
 
     let menuConfig = {
       fontFamily: 'Arial',
       fontSize: '20px',
       backgroundColor: 'cyan',
       color: 'purple',
-      align: 'right',
+      align: 'center',
       padding: {
       top: 5,
       bottom: 5,
       }
     }
-    this.add.text(game.config.width/2, game.config.height/1.4, 'Level 1: The Drive\n\nSPACE to continue', menuConfig).setOrigin(0.5);
-    this.distanceText = this.add.text(game.config.width/4, 50, '', menuConfig).setOrigin(0.5);
-    this.distanceRemainingText = this.add.text(game.config.width * 3/4, 50, '', menuConfig).setOrigin(0.5);
+    //  this.add.text(game.config.width/2, game.config.height/1.4, 'Level 1: The Drive\n\nSPACE to continue', menuConfig).setOrigin(0.5);
+    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
 
 
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'white-car').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'whiteCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  
     this.playerCar.body.onOverlap = true;      
     this.playerCar.setDebugBodyColor(0xFFFF00);
     this.playerCar.setCollideWorldBounds(true);
-    this.playerCar.setMaxVelocity(250, 430).setBounceY(.3).setDrag(900);
+    this.playerCar.setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
     this.playerCar.setScale(3.5);
+    this.playerCar.body.setSize(18);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 2;
+    this.GOAL = 2500;
 
 
-    // Asteroid belt objects
+    // Car obstacles
     this.carGroup = this.add.group({
       runChildUpdate: true    // make sure update runs on group children
     });
@@ -54,12 +50,14 @@ class Intro extends Phaser.Scene {
     this.carSpawnDelay = this.time.addEvent(
       {   delay: 1500, 
           callback: () => {
-            let newCar = new Car(this);
-            this.carGroup.add(newCar);
+            console.log("added car")
+            this.carGroup.add(new Car(this));
           },
           callbackScope: this,
           loop: true 
-      });
+      }
+    );
+    
     
     
     this.timeAlive = 0;
@@ -76,19 +74,16 @@ class Intro extends Phaser.Scene {
     // Player Input
     cursors = this.input.keyboard.createCursorKeys();
 
-    
-
   }
 
 
   update(){
 
+    this.playerCar.setMaxVelocity(40 * this.speed, 40 * this.speed)
     this.distance += this.speed/10
-    this.distanceText.text = Math.floor(this.distance);
-    this.distanceRemainingText.text = Math.floor( 2500 - this.distance );
+    this.distanceRemainingText.text = "Distance Left: " + Math.floor( this.GOAL - this.distance );
 
     // player input
-    this.direction = new Phaser.Math.Vector2(0);
     if(cursors.up.isDown) {
         this.playerCar.body.velocity.y -= (this.CAR_VELOCITY);
     } else if(cursors.down.isDown) {
@@ -99,9 +94,8 @@ class Intro extends Phaser.Scene {
     } else if(cursors.right.isDown) {
         this.playerCar.body.velocity.x += (this.CAR_VELOCITY);
     }
-    if (this.playerCar.y < game.config.height/3) this.playerCar.y = game.config.height/3;
+    if (this.playerCar.y < game.config.height/5) this.playerCar.y = game.config.height/5;
     if (this.playerCar.y > game.config.height * 7/8) this.playerCar.y = game.config.height* 7/8;
-    this.direction.normalize();
 
 
     this.road.tilePositionY -= this.speed;
@@ -114,12 +108,24 @@ class Intro extends Phaser.Scene {
 
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
-        
+    
+    this.templist = this.carGroup.getChildren()
+    this.templist.forEach((car) => {
+      car.setVelocityY((this.speed * 30) + 30);
+    });
+
+    // set car frequency with the constant val
+    this.carSpawnDelay.delay = 4000 / this.speed
+
+    if (this.distance >= this.GOAL) {
+      this.scene.start('timeScene');
+      this.sfx.stop();
+    }
   }
 
   carCollision(object1, object2) { 
     if (!this.carDamaged){
-        object1.y += 30;
+        object1.y += 100;
         this.carDamaged = true;
         this.carInvulnerable = this.time.delayedCall(3000, () => {
             this.carDamaged = false;
