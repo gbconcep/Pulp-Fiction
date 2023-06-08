@@ -5,7 +5,7 @@ let config = {
   physics: {
       default: "arcade",
       arcade: {
-          debug: true
+          debug: false
       }
   },
   scene: [Load, Title, Intro, Time, Stealth]

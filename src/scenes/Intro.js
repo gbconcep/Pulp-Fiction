@@ -12,7 +12,7 @@ class Intro extends Phaser.Scene {
 
     let menuConfig = {
       fontFamily: 'Arial',
-      fontSize: '20px',
+      fontSize: '30px',
       backgroundColor: 'cyan',
       color: 'purple',
       align: 'center',
@@ -38,7 +38,7 @@ class Intro extends Phaser.Scene {
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 2;
-    this.GOAL = 2500;
+    this.GOAL = 1000;
 
 
     // Car obstacles
