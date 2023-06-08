@@ -12,7 +12,7 @@ class Stealth extends Phaser.Scene {
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'freeway').setOrigin(0,0);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -35,7 +35,7 @@ class Stealth extends Phaser.Scene {
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setMaxVelocity(250, 430).setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setScale(2.5);
+    this.playerCar.setScale(1);
     this.playerCar.body.onOverlap = true;
     this.SHIP_VELOCITY = 50;
 

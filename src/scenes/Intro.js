@@ -4,11 +4,25 @@ class Intro extends Phaser.Scene {
   }
 
   create() {
+    this.tutorialPanel = this.add.sprite(game.config.width/2,game.config.height/1.2, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+        this.tutorialText = this.add.text(game.config.width/2 - 13,game.config.height/1.2 - 5,
+        `
+        INTRO STAGE:
+        Avoid as many cars as you can and get to the apartment!
+        `, {
+            fontFamily: 'Verdana',
+            fontSize: '11px',
+            padding: {
+                top: 0,
+                bottom: 0,
+            }
+        }).setOrigin(0.5,0.5).setDepth(101);
+
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
 
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(2.05);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -33,7 +47,7 @@ class Intro extends Phaser.Scene {
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setScale(3.5);
+    this.playerCar.setScale(1);
     this.playerCar.body.setSize(18);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
@@ -75,14 +89,20 @@ class Intro extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     // dialogue
-    this.script = new dialogueBoxBundle(this, [
-      ['JULES', 'So, tell me about hash.']
-    ], true)
+    // this.script = new dialogueBoxBundle(this, [
+    //   ['JULES', 'So, tell me about hash.']
+    // ], true)
 
   }
 
 
   update(){
+  //   if (Phaser.Input.Keyboard.JustDown(keyH)) {
+  //     //console.log('bruh');
+  //     this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
+  //     this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
+  //     this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
+  // }
 
     this.playerCar.setMaxVelocity(40 * this.speed, 40 * this.speed)
     this.distance += this.speed/10

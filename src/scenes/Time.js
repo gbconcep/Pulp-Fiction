@@ -5,6 +5,19 @@ class Time extends Phaser.Scene {
 
 
   create() {
+    this.tutorialPanel = this.add.sprite(game.config.width/2,game.config.height/1.2, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+        this.tutorialText = this.add.text(game.config.width/2 - 13,game.config.height/1.2 - 5,
+        `
+        RACE TO THE FINISH:
+        Get Mia to Lance's house before time runs out!
+        `, {
+            fontFamily: 'Verdana',
+            fontSize: '11px',
+            padding: {
+                top: 0,
+                bottom: 0,
+            }
+        }).setOrigin(0.5,0.5).setDepth(101);
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
@@ -36,7 +49,7 @@ class Time extends Phaser.Scene {
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setScale(3.5);
+    this.playerCar.setScale(1);
     this.playerCar.body.setSize(18);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
