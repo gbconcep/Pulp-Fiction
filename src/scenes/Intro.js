@@ -20,25 +20,16 @@ class Intro extends Phaser.Scene {
       }
   );
 
-    this.tutorialPanel = this.add.sprite(game.config.width/2,game.config.height/1.2, 'textbox').setOrigin(0.5,0.5).setDepth(101);
-        this.tutorialText = this.add.text(game.config.width/2 - 13,game.config.height/1.2 - 5,
-        `
-        INTRO STAGE:
-        Avoid as many cars as you can and get to the apartment!
-        `, {
-            fontFamily: 'Verdana',
-            fontSize: '11px',
-            padding: {
-                top: 0,
-                bottom: 0,
-            }
-        }).setOrigin(0.5,0.5).setDepth(101);
+    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+    this.tutorialPanel.setScale(2, .7);
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
+    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
 
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(2.05);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -113,12 +104,12 @@ class Intro extends Phaser.Scene {
 
 
   update(){
-  //   if (Phaser.Input.Keyboard.JustDown(keyH)) {
-  //     //console.log('bruh');
-  //     this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
-  //     this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
-  //     this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
-  // }
+    if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
+      //console.log('bruh');
+      this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
+      this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
+      this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
+  }
     
     // if (!this.screenFadeing) this.dialog.update();
 
@@ -164,6 +155,8 @@ class Intro extends Phaser.Scene {
     // set car frequency with the constant val
     this.carSpawnDelay.delay = 4000 / this.speed
 
+
+    // check win condition
     if (this.distance >= this.GOAL) {
       this.distanceRemainingText.removeFromDisplayList();   
       this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
