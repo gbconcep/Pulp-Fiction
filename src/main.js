@@ -14,5 +14,5 @@ let config = {
 let game = new Phaser.Game(config);
 
 // keyboard variables
-let keyUP, keyDOWN, key1, key2;
+let keyUP, keyDOWN, key1, key2, keyH;
 let cursors = null;

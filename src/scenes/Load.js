@@ -21,7 +21,9 @@ class Load extends Phaser.Scene {
         this.load.image('bloodCar', 'blood-car.png');
         this.load.image('logo', 'pulp-fiction-logo.png');
         this.load.image('redCar', 'convertible.png');
+        this.load.image('city', 'city.png');
         this.load.image('road', 'road.png');
+        this.load.image('freeway', 'freeway.png');
         this.load.image('blackPolice', 'black-police.png');
         this.load.image('bluePolice', 'blue-police.png');
         this.load.image('purpleCar', 'purple-car.png');
@@ -29,6 +31,8 @@ class Load extends Phaser.Scene {
         this.load.image('orangeCar', 'orange-car.png');
         this.load.image('greenCar', 'green-car.png');
         this.load.image('aquaCar', 'aqua-car.png');
+        this.load.image('textbox', 'text-box.png');
+        this.load.image('dialoguebox', 'dialogue-box.png');
 
         // audio
         this.load.audio('driving', 'driving.mp3');
