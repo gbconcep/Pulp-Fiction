@@ -22,8 +22,6 @@ class Car extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-
-
         // destroy car if it reaches past the bottom edge of the screen
         if(game.config.height + 100 < this.y) {
             this.destroy();

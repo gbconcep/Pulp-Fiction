@@ -17,9 +17,12 @@ class Intro extends Phaser.Scene {
         ['center', "Some other response to dialog"],
         ['end', "convo"]
       ])
-      }
-  );
+    });
 
+
+
+
+    // hint panel
     this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
     this.tutorialPanel.setScale(2, .7);
     this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
@@ -58,6 +61,10 @@ class Intro extends Phaser.Scene {
     this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
+    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
+
+
+
     this.speed = 2;
     this.GOAL = 1000;
 
@@ -78,8 +85,8 @@ class Intro extends Phaser.Scene {
           loop: true 
       }
     );
-    
-    
+
+
     
     this.timeAlive = 0;
     this.distance = 0;    
@@ -104,12 +111,13 @@ class Intro extends Phaser.Scene {
 
 
   update(){
+    // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
       //console.log('bruh');
       this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
       this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
       this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
-  }
+    }
     
     // if (!this.screenFadeing) this.dialog.update();
 
@@ -131,10 +139,12 @@ class Intro extends Phaser.Scene {
     if (this.playerCar.y < game.config.height/5) this.playerCar.y = game.config.height/5;
     if (this.playerCar.y > game.config.height * 7/8) this.playerCar.y = game.config.height* 7/8;
 
-
+    // speed updates
     this.road.tilePositionY -= this.speed;
     if (this.speed < 10)this.speed += .005
 
+
+    // debug scene skip w SPACE
     if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) { 
       this.distanceRemainingText.removeFromDisplayList();   
       this.cam = this.cameras.main.fadeOut(2000, 0, 0, 0);
@@ -144,6 +154,9 @@ class Intro extends Phaser.Scene {
       })     
     }
 
+    // colision detection
+    this.playerCar.detectionZone.x = this.playerCar.x;
+    this.playerCar.detectionZone.y = this.playerCar.y
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
     
@@ -157,7 +170,8 @@ class Intro extends Phaser.Scene {
 
 
     // check win condition
-    if (this.distance >= this.GOAL) {
+    if (this.distance >= this.GOAL && !this.screenFadeing) {
+      this.screenFadeing = true;
       this.distanceRemainingText.removeFromDisplayList();   
       this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
       this.cam.on('camerafadeoutcomplete', () => {

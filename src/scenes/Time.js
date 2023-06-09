@@ -5,19 +5,12 @@ class Time extends Phaser.Scene {
 
 
   create() {
-    this.tutorialPanel = this.add.sprite(game.config.width/2,game.config.height/1.2, 'textbox').setOrigin(0.5,0.5).setDepth(101);
-        this.tutorialText = this.add.text(game.config.width/2 - 13,game.config.height/1.2 - 5,
-        `
-        RACE TO THE FINISH:
-        Get Mia to Lance's house before time runs out!
-        `, {
-            fontFamily: 'Verdana',
-            fontSize: '11px',
-            padding: {
-                top: 0,
-                bottom: 0,
-            }
-        }).setOrigin(0.5,0.5).setDepth(101);
+    // hint panel
+    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+    this.tutorialPanel.setScale(2, .7);
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
+    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
+
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
@@ -54,7 +47,10 @@ class Time extends Phaser.Scene {
     this.CAR_VELOCITY = 50;
     this.speed = 2;
     this.GOAL = 2000;
+    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
 
+
+    this.cameras.main.postFX.addVignette()
 
     // Car obstacles
     this.carGroup = this.add.group({
@@ -81,14 +77,9 @@ class Time extends Phaser.Scene {
     this.carDamaged = false;
     this.timeLeft = 60;
 
-    // basically a diy tween for easing movement into the scene at startup 
-    // this.speedRamp = .3;
-    // this.delayedRamp = this.time.delayedCall(2000, () => {
-    //   this.speedRamp = 0;
-    // }, null, this);
 
     // Player Input
-    cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
     this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
     this.gameOver = false;
@@ -107,6 +98,14 @@ class Time extends Phaser.Scene {
 
 
   update(){
+    // hint toggle
+    if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
+      //console.log('bruh');
+      this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
+      this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
+      this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
+    }
+
     // check for lose condition
     if (this.gameOver && Phaser.Input.Keyboard.JustDown(this.keyR)) {
       this.scene.start("titleScene");
@@ -118,7 +117,7 @@ class Time extends Phaser.Scene {
     if(this.gameOver){
       this.carGroup.runChildUpdate = false;
       this.playerCar.removeFromDisplayList();
-      this.playerCar.setPosition(100000,10000)
+      this.playerCar.setPosition(100000,10000);
     } else {
       this.playerCar.setMaxVelocity(40 * this.speed, 40 * this.speed)
       this.distance += this.speed/10
@@ -131,14 +130,14 @@ class Time extends Phaser.Scene {
     
 
     // player input
-    if(cursors.up.isDown) {
+    if(this.cursors.up.isDown) {
         this.playerCar.body.velocity.y -= (this.CAR_VELOCITY);
-    } else if(cursors.down.isDown) {
+    } else if(this.cursors.down.isDown) {
         this.playerCar.body.velocity.y += (this.CAR_VELOCITY);
     }
-    if(cursors.left.isDown) {
+    if(this.cursors.left.isDown) {
         this.playerCar.body.velocity.x -= (this.CAR_VELOCITY);
-    } else if(cursors.right.isDown) {
+    } else if(this.cursors.right.isDown) {
         this.playerCar.body.velocity.x += (this.CAR_VELOCITY);
     }
     if (this.playerCar.y < game.config.height/5) this.playerCar.y = game.config.height/5;
@@ -151,6 +150,7 @@ class Time extends Phaser.Scene {
     //   this.sfx.stop()      
     // }
 
+    // colision detection
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
     
