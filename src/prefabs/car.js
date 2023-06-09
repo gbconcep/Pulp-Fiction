@@ -18,10 +18,8 @@ class Car extends Phaser.Physics.Arcade.Sprite {
         this.parentScene.physics.add.existing(this);
         this.setVelocityY(120);
         this.setImmovable();
-        this.setScale(4);
-        this.flipY = true;
-        this.body.setSize(18);
-        }
+        this.body.setSize(60);
+    }
 
     update() {
 

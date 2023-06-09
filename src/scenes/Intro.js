@@ -4,6 +4,22 @@ class Intro extends Phaser.Scene {
   }
 
   create() {
+    this.screenFadeing = true;
+    // fade scene in from black at start of scene
+    this.cam = this.cameras.main.fadeIn(5000, 0, 0, 0, null, this);
+
+    // enable player input after camera finished fading in
+    this.cam.on('camerafadeincomplete', () => {
+      this.input.keyboard.enabled = true;
+      this.screenFadeing = false;
+      this.dialog = new dialogBoxBundle(this, [
+        ['left', "Basic starter text for the conversation"],
+        ['center', "Some other response to dialog"],
+        ['end', "convo"]
+      ])
+      }
+  );
+
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
@@ -33,8 +49,8 @@ class Intro extends Phaser.Scene {
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setScale(3.5);
-    this.playerCar.body.setSize(18);
+    //this.playerCar.setScale(3.5);
+    this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 2;
@@ -72,31 +88,33 @@ class Intro extends Phaser.Scene {
     // }, null, this);
 
     // Player Input
-    cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
 
-    // dialogue
-    this.script = new dialogueBoxBundle(this, [
-      ['JULES', 'So, tell me about hash.']
-    ], true)
+    // // dialogue
+    // this.script = new dialogueBoxBundle(this, [
+    //   ['JULES', 'So, tell me about hash.']
+    // ], true)
 
   }
 
 
   update(){
+    
+    // if (!this.screenFadeing) this.dialog.update();
 
-    this.playerCar.setMaxVelocity(40 * this.speed, 40 * this.speed)
+    this.playerCar.setMaxVelocity(40 * this.speed, 40 * this.speed);
     this.distance += this.speed/10
     this.distanceRemainingText.text = "Distance Left: " + Math.floor( this.GOAL - this.distance );
 
     // player input
-    if(cursors.up.isDown) {
+    if(this.cursors.up.isDown) {
         this.playerCar.body.velocity.y -= (this.CAR_VELOCITY);
-    } else if(cursors.down.isDown) {
+    } else if(this.cursors.down.isDown) {
         this.playerCar.body.velocity.y += (this.CAR_VELOCITY);
     }
-    if(cursors.left.isDown) {
+    if(this.cursors.left.isDown) {
         this.playerCar.body.velocity.x -= (this.CAR_VELOCITY);
-    } else if(cursors.right.isDown) {
+    } else if(this.cursors.right.isDown) {
         this.playerCar.body.velocity.x += (this.CAR_VELOCITY);
     }
     if (this.playerCar.y < game.config.height/5) this.playerCar.y = game.config.height/5;
@@ -106,9 +124,13 @@ class Intro extends Phaser.Scene {
     this.road.tilePositionY -= this.speed;
     if (this.speed < 10)this.speed += .005
 
-    if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
-      this.scene.start('timeScene');
-      this.sfx.stop()      
+    if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) { 
+      this.distanceRemainingText.removeFromDisplayList();   
+      this.cam = this.cameras.main.fadeOut(2000, 0, 0, 0);
+      this.cam.on('camerafadeoutcomplete', () => {
+        this.scene.start('timeScene');
+        this.sfx.stop() 
+      })     
     }
 
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
@@ -123,8 +145,12 @@ class Intro extends Phaser.Scene {
     this.carSpawnDelay.delay = 4000 / this.speed
 
     if (this.distance >= this.GOAL) {
-      this.scene.start('timeScene');
-      this.sfx.stop();
+      this.distanceRemainingText.removeFromDisplayList();   
+      this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
+      this.cam.on('camerafadeoutcomplete', () => {
+        this.scene.start('timeScene');
+        this.sfx.stop() 
+      })   
     }
   }
 

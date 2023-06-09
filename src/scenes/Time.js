@@ -36,8 +36,7 @@ class Time extends Phaser.Scene {
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setBounceY(.3).setDrag(900);
     this.playerCar.setDepth(10);
-    this.playerCar.setScale(3.5);
-    this.playerCar.body.setSize(18);
+    this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 2;

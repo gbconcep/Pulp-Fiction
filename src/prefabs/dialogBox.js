@@ -33,12 +33,12 @@ class Dialog {
             console.log('Undifined Side on Dialog Box with :' + bodyText)
         }
         
-        this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5);
+        this.image = scene.add.sprite(x, y, 'redCar').setOrigin(.5);
 
-        if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset,y, "CraftyGirls24", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth);
+        if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset,y, "dialogW", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth);
         else {
-            this.boxText = scene.add.bitmapText(x, y + 75, "CraftyGirls24", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth);
-            this.oldText = scene.add.bitmapText(x, y - 65, "CraftyGirls24", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setAlpha(.45);
+            this.boxText = scene.add.bitmapText(x, y + 75, "dialogW", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth);
+            this.oldText = scene.add.bitmapText(x, y - 65, "dialogW", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setAlpha(.45);
         }
 
         this.waitArrow = scene.add.sprite(x + arrowOffset.x, y + arrowOffset.y, bubbleType === 'playerBubble' ? 'playerTri' : (bubbleType === 'grandBubble' || bubbleType === 'largeGrandBubble') ? 'grandTri' : null).setOrigin(.5);
