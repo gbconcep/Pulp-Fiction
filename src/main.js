@@ -1,3 +1,6 @@
+// Pulp Fiction
+// Game by Alex Groff and Gavin Concepcion
+
 let config = {
   type: Phaser.AUTO,
   width: 800,
