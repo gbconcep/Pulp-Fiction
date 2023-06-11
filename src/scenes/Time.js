@@ -3,10 +3,6 @@ class Time extends Phaser.Scene {
     super("timeScene");
   }
 
-  
-  preload() {
-    this.load.image('vignette', 'vignette.png');
-  }
 
   create() {
     this.sfx = this.sound.add('driving');
@@ -14,6 +10,7 @@ class Time extends Phaser.Scene {
         this.sfx.play()
 
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
+    this.vignette = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'vignette').setOrigin(0, 0).setScale(0, 2.05);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -78,8 +75,6 @@ class Time extends Phaser.Scene {
     this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
     this.gameOver = false;
-
-    // this.vignette = this.add.image(0, 0, 'vignette').setOrigin(0, 0).setScale(2.05, 2.05);
 
     // 60 sec play clock
     this.clock = this.time.delayedCall(60000, () => {
