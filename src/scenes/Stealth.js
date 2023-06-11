@@ -95,6 +95,35 @@ class Stealth extends Phaser.Scene {
   
     }, null, this);
 
+    // dialogue
+    // this.script = new dialogueBoxBundle(this, [
+    //   ['left', 'JULES: Wtf is happening?'],
+    //   ['right', 'VINCENT: Ah man, I just shot Marvin in the face...'],
+    //   ['left', 'JULES: Why tf did you do that?'],
+    //   ['right', 'VINCENT: I didnt mean to do it. It was an accident!'],
+    //   ['left', 'JULES: Man I have seen a lot of craziness in my time and-'],
+    //   ['right', 'VINCENT: CHill out man, it was an accident! You hit a bump or somethin...'], 
+    //   ['left', 'JULES: This car did not hit no bump!'],
+    //   ['right', 'VINCENT: Look, I didnt mean to shoot him. The gun just went off, dont ask me out!'],
+    //   ['left', 'JULES: Look at this mess! We are driving on the city streets in broad daylight!'],
+    //   ['right', 'VINCENT: I know, I know! I wasnt thinking about the splatter...'],
+    //   ['left', 'JULES: Well you better be thinking about the splatter!'],
+    //   ['left', 'JULES: We have to get this car off the road.'],
+    //   ['left', 'JULES: Cops tend to notice when a car is drenched in blood!'],
+    //   ['right', 'VINCENT: Cant we just take it to a friendly place?'],
+    //   ['left', 'JULES: Friendlyplace-this is the Valley, Vincent!'],
+    //   ['left', 'JULES: Marsellus got no friendly places in the Valley!'],
+    //   ['right', 'VINCENT: Well dont look at me! This is your town, Jules!'],
+    //   ['left', 'JULES: *sigh* Hang on, lemme make a call...'],
+    //   ['right', 'VINCENT: Who you callin?'],
+    //   ['left', 'JULES: A buddy of mine in Toluca Lake.'],
+    //   ['right', 'VINCENT: Wheres Toluca Lake?'],
+    //   ['left', 'JULES: On the other side of the hill, by Burbank Studios.'],
+    //   ['left', 'JULES: If Jimmie aint home, I dont know what we are going to do'],
+    //   ['left', 'JULES: Jimmie! How you doin, man it Jules.'],
+    //   ['left', 'JULES: Me and a friend need to use your garage for a couple hours...'],
+    //   ['end', "convo"]
+    // ], true)
 
   }
 
