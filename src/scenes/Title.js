@@ -3,7 +3,6 @@ class Title extends Phaser.Scene {
       super("titleScene");
     }
     
-    
     create() {
 
         this.logo = this.add.sprite(game.config.width/2, game.config.width/3, 'logo').setOrigin(.5);
@@ -42,7 +41,10 @@ class Title extends Phaser.Scene {
         menuConfig.color = '#000';
         directionConfig.fixedWidth = 0
 
-        this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', directionConfig).setOrigin(0.5);
+        // this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.4, 'Press 1 for Level 1', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.3, 'Press 2 for Level 2', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.2, 'Press 3 for Level 3', directionConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height * 2.5/4, 'Use ARROW KEYS to move', directionConfig).setOrigin(0.5);
         // this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
 

@@ -3,14 +3,12 @@ class Time extends Phaser.Scene {
     super("timeScene");
   }
 
+  
+  preload() {
+    this.load.image('vignette', 'vignette.png');
+  }
 
   create() {
-    // hint panel
-    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
-    this.tutorialPanel.setScale(2, .7);
-    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
-    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
-
     this.sfx = this.sound.add('driving');
         this.sfx.setLoop(true);
         this.sfx.play()
@@ -50,7 +48,7 @@ class Time extends Phaser.Scene {
     this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
 
 
-    this.cameras.main.postFX.addVignette()
+    // this.cameras.main.postFX.addVignette()
 
     // Car obstacles
     this.carGroup = this.add.group({
@@ -69,20 +67,19 @@ class Time extends Phaser.Scene {
       }
     );
     
-    
-    
     this.timeAlive = 0;
     this.distance = 0;    
     this.carInvulnerable = false;
     this.carDamaged = false;
     this.timeLeft = 60;
 
-
     // Player Input
     this.cursors = this.input.keyboard.createCursorKeys();
     this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
     this.gameOver = false;
+
+    // this.vignette = this.add.image(0, 0, 'vignette').setOrigin(0, 0).setScale(2.05, 2.05);
 
     // 60 sec play clock
     this.clock = this.time.delayedCall(60000, () => {
@@ -92,6 +89,12 @@ class Time extends Phaser.Scene {
       this.gameOver = true;
   
     }, null, this);
+
+    // hint panel
+    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+    this.tutorialPanel.setScale(2, .7);
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
+    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
     // dialogue
     this.script = new dialogBoxBundle(this, [
