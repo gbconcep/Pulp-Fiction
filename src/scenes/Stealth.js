@@ -8,7 +8,7 @@ class Stealth extends Phaser.Scene {
     // hint panel
     this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
     this.tutorialPanel.setScale(2, .7);
-    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nGet to Jimmie's without getting caught!`, 20).setDepth(101).setOrigin(.5)
     this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
     // sound
@@ -37,7 +37,7 @@ class Stealth extends Phaser.Scene {
 
 
     // Player Car Setup
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'redCar').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'bloodCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  
     this.playerCar.body.onOverlap = true;      
@@ -57,18 +57,25 @@ class Stealth extends Phaser.Scene {
       runChildUpdate: true    // make sure update runs on group children
     });
 
-    //car spawner
-    this.carSpawnDelay = this.time.addEvent(
-      {   delay: 1500, 
-          callback: () => {
-            console.log("added car")
-            this.carGroup.add(new Car(this));
-          },
-          callbackScope: this,
-          loop: true 
-      }
-    );
-    
+    // Initialize a variable to keep track of the spawn count
+    let spawnCount = 0;
+
+    // Car spawner
+    this.carSpawnDelay = this.time.addEvent({
+      delay: 1500,
+      callback: () => {
+        console.log("added car");
+        if (spawnCount % 2 === 0) {
+          this.carGroup.add(new Car(this));
+        } else {
+          this.carGroup.add(new Police(this));
+        }
+        spawnCount++;
+      },
+      callbackScope: this,
+      loop: true,
+    });
+
     
     
     this.timeAlive = 0;
@@ -100,31 +107,31 @@ class Stealth extends Phaser.Scene {
 
     // dialogue
     this.script = new dialogBoxBundle(this, [
-      ['left', 'JULES: Wtf is happening?'],
-      ['right', 'VINCENT: Ah man, I just shot Marvin in the face...'],
-      ['left', 'JULES: Why tf did you do that?'],
-      ['right', 'VINCENT: I didnt mean to do it. It was an accident!'],
-      ['left', 'JULES: Man I have seen a lot of craziness in my time and-'],
-      ['right', 'VINCENT: CHill out man, it was an accident! You hit a bump or somethin...'], 
-      ['left', 'JULES: This car did not hit no bump!'],
-      ['right', 'VINCENT: Look, I didnt mean to shoot him. The gun just went off, dont ask me out!'],
-      ['left', 'JULES: Look at this mess! We are driving on the city streets in broad daylight!'],
-      ['right', 'VINCENT: I know, I know! I wasnt thinking about the splatter...'],
-      ['left', 'JULES: Well you better be thinking about the splatter!'],
-      ['left', 'JULES: We have to get this car off the road.'],
-      ['left', 'JULES: Cops tend to notice when a car is drenched in blood!'],
-      ['right', 'VINCENT: Cant we just take it to a friendly place?'],
-      ['left', 'JULES: Friendlyplace-this is the Valley, Vincent!'],
-      ['left', 'JULES: Marsellus got no friendly places in the Valley!'],
-      ['right', 'VINCENT: Well dont look at me! This is your town, Jules!'],
-      ['left', 'JULES: *sigh* Hang on, lemme make a call...'],
-      ['right', 'VINCENT: Who you callin?'],
-      ['left', 'JULES: A buddy of mine in Toluca Lake.'],
-      ['right', 'VINCENT: Wheres Toluca Lake?'],
-      ['left', 'JULES: On the other side of the hill, by Burbank Studios.'],
-      ['left', 'JULES: If Jimmie aint home, I dont know what we are going to do'],
-      ['left', 'JULES: Jimmie! How you doin, man it Jules.'],
-      ['left', 'JULES: Me and a friend need to use your garage for a couple hours...'],
+      ['left', `JULES: Wtf is happening?`],
+      ['right', `VINCENT: Ah man, I just shot Marvin in the face...`],
+      ['left', `JULES: Why the fuck did you do that?`],
+      ['right', `VINCENT: I didn't mean to do it. It was an accident!`],
+      ['left', `JULES: Man I have seen a lot of craziness in my time and-`],
+      ['right', `VINCENT: Chill out man, it was an accident! You hit a bump or somethin'...`], 
+      ['left', `JULES: This car didn't hit no bump!`],
+      ['right', `VINCENT: Look, I didn't mean to shoot him. The gun just went off, dont ask me out!`],
+      ['left', `JULES: Look at this mess! We are driving on the city streets in broad daylight!`],
+      ['right', `VINCENT: I know, I know! I wasn't thinking about the splatter...`],
+      ['left', `JULES: Well you better be thinking about the splatter!`],
+      ['left', `JULES: We have to get this car off the road.`],
+      ['left', `JULES: Cops tend to notice when a car is drenched in blood!`],
+      ['right', `VINCENT: Can't we just take it to a friendly place?`],
+      ['left', `JULES: Friendlyplace-this is the Valley, Vincent!`],
+      ['left', `JULES: Marsellus got no friendly places in the Valley!`],
+      ['right', `VINCENT: Well don't look at me! This is your town, Jules!`],
+      ['left', `JULES: *sigh* Hang on, lemme make a call...`],
+      ['right', `VINCENT: Who you callin'?`],
+      ['left', `JULES: A buddy of mine in Toluca Lake.`],
+      ['right', `VINCENT: Wheres Toluca Lake?`],
+      ['left', `JULES: On the other side of the hill, by Burbank Studios.`],
+      ['left', `JULES: If Jimmie ain't home, I dont know what we are going to do!`],
+      ['left', `JULES: Jimmie! How you doin, man it Jules.`],
+      ['left', `JULES: Me and a friend need to use your garage for a couple hours...`],
       ['end', "convo"]
     ], true)
 
