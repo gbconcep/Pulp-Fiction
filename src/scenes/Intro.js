@@ -60,7 +60,7 @@ class Intro extends Phaser.Scene {
     this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
-    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
+    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 20);
 
 
 
@@ -134,7 +134,8 @@ class Intro extends Phaser.Scene {
       ['left', 'JULES: What they call a Whopper?'],
       ['right', 'VINCENT: I dunno. I didnt go into Burger King.'],
       ['end', "convo"]
-    ], true)
+    ], true);
+
   }
 
 

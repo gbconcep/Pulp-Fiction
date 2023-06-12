@@ -128,11 +128,13 @@ class Stealth extends Phaser.Scene {
       ['end', "convo"]
     ], true)
 
+    this.cop = new Police(this, 200, this.playerCar.detectionZone);
   }
 
 
   update(){
-    this.script.update()
+    this.script.update();
+    this.cop.update();
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
       //console.log('bruh');

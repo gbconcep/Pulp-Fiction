@@ -1,26 +1,28 @@
 class Police extends Car {
-    constructor (scene, lane = false, r = 100) {
-        super(scene, lane);
-        this.setOrigin(.5);
-
-        //this.carAssets = ['blackPolice', 'bluePolice'];
-
-        this.detectionRadius = r;
-        this.zone = new Phaser.Geom.Circle(this.x, this.y, r);
-        // this.ellipse2 = new Phaser.Geom.Ellipse(this.x, this.y, 0);
+    constructor (scene, r = 150, playerZone = null, lane = false) {
+        let carAssets = ['blackPolice', 'bluePolice'];
 
         
 
+        let detectionRadius = r;
+        let detectionLevel = 0;
+        let zone = new Phaser.Geom.Circle(0, 0, r);        
 
-        this.graphic = scene.add.graphics({ 
-            fillStyle: {color: 0xff0000, alpha: 1 }
-        });
-        // this.graphic2 = scene.add.graphics({ 
-        //     fillStyle: {color: 0x0f0, alpha: 1 }
-        // });
-        this.graphic.strokeCircleShape(this.zone, 64);
-        // this.graphic2.strokeEllipseShape(this.ellipse2, 64);
 
+        let graphic = scene.add.graphics();
+        graphic.strokeCircleShape(zone, 64);
+
+        let foundPlayer = false;
+        
+        super(scene, lane, Phaser.Utils.Array.GetRandom(carAssets));
+        this.setOrigin(.5);
+
+        this.foundPlayer = foundPlayer;
+        this.graphicEngine = graphic;
+        this.zone = zone;
+        this.detectionLevel = detectionLevel;
+        this.detectionRadius = detectionRadius;
+        this.playerZone = playerZone;
 
     }
 
@@ -37,21 +39,28 @@ class Police extends Car {
 
         //console.log("zone 1 - x: " + this.zone.x + "     y: " + this.zone.y)
 
-        this.graphic.clear();
-        // this.graphic2.clear();
-        this.graphic.strokeCircleShape(this.zone, 64);
-        // this.graphic2.strokeEllipseShape(this.ellipse2, 64);
+        this.graphicEngine.clear();
+        this.graphicEngine.fillStyle(0xFF0000, this.detectionLevel/100);
+        this.graphicEngine.fillCircleShape(this.zone);
+        //this.graphicEngine.strokeCircleShape(this.zone, 64);
 
-        // if (Phaser.Geom.Intersects.CircleToCircle(this.zone, this.zone)) console.log("overlap")
 
+        this.detectionLevel <= 0 ? false : this.detectionLevel--;
+
+        if(this.foundPlayer) this.scene.scene.start('titleScene');
+
+        if (this.playerZone != null) this.isOverlapping(this.playerZone);
     }
 
     isOverlapping(objCircleZone) {
         if (Phaser.Geom.Intersects.CircleToCircle(this.zone, objCircleZone)){
-            console.log("overlap")
+            console.log("overlap");
+            if (this.detectionLevel < 100) this.detectionLevel += 2;
+            else this.foundPlayer = true;
             return true;
         }
 
         return false;
     }
+
 }
