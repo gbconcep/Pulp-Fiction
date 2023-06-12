@@ -12,40 +12,40 @@ class Dialog {
         if (side == 'left') {
             x = (game.config.width / 5) + 40
             y = inFocus ? game.config.height / 2 : (game.config.height * 5/6) - 61
-            bubbleType = 'playerBubble';
-            textOffset.x += 20
-            textOffset.y += 40
-            arrowOffset.x += 20
-            arrowOffset.y += 80
+            bubbleType = 'jules';
+            // textOffset.x += 20
+            // textOffset.y += 40
+            // arrowOffset.x += 20
+            // arrowOffset.y += 80
 
         } else if (side == 'right') {
             x = game.config.width * 3/4
             y = inFocus ? game.config.height / 2 : (game.config.height * 5/6) - 61
-            bubbleType = 'grandBubble'
-            textOffset.x -= 10
-            textOffset.y += 40
-            arrowOffset.x -= 10
-            arrowOffset.y += 80
+            bubbleType = 'vince'
+            // textOffset.x -= 10
+            // textOffset.y += 40
+            // arrowOffset.x -= 10
+            // arrowOffset.y += 80
 
 
         } else if (side == 'center'){
             x = game.config.width / 2 
             y = inFocus ? game.config.height / 2 : game.config.height * 4/5
-            bubbleType = 'largeGrandBubble'
-            arrowOffset.y += 60;
-            arrowOffset.x += 300;
+            bubbleType = 'lance'
+            // arrowOffset.y += 60;
+            // arrowOffset.x += 300;
 
         } else {
             console.log('Undifined Side on Dialog Box with :' + bodyText)
         }
         
-        this.image = scene.add.sprite(x, y, 'redCar').setOrigin(.5);
+        this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5).setScale(4.5, 5.5);
         this.image.setAlpha(1).setDepth(50);
 
-        if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset.x, y + textOffset.y, "dialogW", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
+        if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset.x, y + textOffset.y, "dialogB", '', 30).setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
         else {
-            this.boxText = scene.add.bitmapText(x, y + 75, "dialogW", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
-            this.oldText = scene.add.bitmapText(x, y - 65, "dialogW", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50).setAlpha(.45);
+            this.boxText = scene.add.bitmapText(x, y + 75, "dialogB", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
+            this.oldText = scene.add.bitmapText(x, y - 65, "dialogB", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50).setAlpha(.45);
         }
 
         this.waitArrow = scene.add.sprite(x + arrowOffset.x, y + arrowOffset.y, bubbleType === 'playerBubble' ? 'playerTri' : (bubbleType === 'grandBubble' || bubbleType === 'largeGrandBubble') ? 'grandTri' : null).setOrigin(.5);

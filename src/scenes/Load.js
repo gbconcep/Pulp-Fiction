@@ -32,14 +32,21 @@ class Load extends Phaser.Scene {
         this.load.image('greenCar', 'green-car.png');
         this.load.image('aquaCar', 'aqua-car.png');
         this.load.image('textbox', 'text-box.png');
-        this.load.image('dialoguebox', 'dialogue-box.png');
         this.load.image('vignette', 'vignette.png');
+
+        // Dialog Boxes
+        this.load.image('dialoguebox', 'dialogue-box.png');
+        this.load.image('vince', 'vincedialog.png');
+        this.load.image('lance', 'lancedialog.png');
+        this.load.image('jules', 'julesdialog.png');
+
 
         // audio
         this.load.audio('driving', 'driving.mp3');
 
         // text fonts
         this.load.bitmapFont("dialogW", "./fonts/dialogWhite/dialogWhite.png", "./fonts/dialogWhite/dialogWhite.xml");
+        this.load.bitmapFont("dialogB", "./fonts/dialogBlack/dialogBlack.png", "./fonts/dialogBlack/dialogBlack.xml");
 
 
     }

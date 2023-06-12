@@ -93,7 +93,7 @@ class Time extends Phaser.Scene {
 
     // dialogue
     this.script = new dialogBoxBundle(this, [
-      ['left', 'JULES: Hello, do you know how late it is? Youre not supposed to be callin me this late.'],
+      ['left', 'JULES: Hello, do you know how late it is? You\'re not supposed to be callin me this late.'],
       ['right', 'VINCENT: Lance, this is Vincent! Im driving to your place right now!!'],
       ['left', 'LANCE: Whoa, hold you horses man, whats the problem?'],
       ['right', 'VINCENT: You still got an adrenaline shot?'],

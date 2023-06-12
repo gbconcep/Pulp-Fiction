@@ -134,7 +134,7 @@ class Intro extends Phaser.Scene {
       ['left', 'JULES: What they call a Whopper?'],
       ['right', 'VINCENT: I dunno. I didnt go into Burger King.'],
       ['end', "convo"]
-    ], true);
+    ]);
 
   }
 
