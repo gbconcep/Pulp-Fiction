@@ -11,10 +11,12 @@ class Time extends Phaser.Scene {
     this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
     this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
+    //sound
     this.sfx = this.sound.add('driving');
-        this.sfx.setLoop(true);
-        this.sfx.play()
+    this.sfx.setLoop(true);
+    this.sfx.play()
 
+    //Background Road
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
 
     let menuConfig = {
@@ -33,7 +35,7 @@ class Time extends Phaser.Scene {
     this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
     this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5);
 
-
+    // Player Car Setup
     this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'redCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  
@@ -49,8 +51,8 @@ class Time extends Phaser.Scene {
     this.GOAL = 2000;
     this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
 
-
-    this.cameras.main.postFX.addVignette()
+    //Testing Night-like visuals w the Camera
+    //this.cameras.main.postFX.addVignette()
 
     // Car obstacles
     this.carGroup = this.add.group({

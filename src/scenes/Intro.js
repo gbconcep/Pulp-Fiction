@@ -28,10 +28,12 @@ class Intro extends Phaser.Scene {
     this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
     this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
+    // sound
     this.sfx = this.sound.add('driving');
-        this.sfx.setLoop(true);
-        this.sfx.play()
+    this.sfx.setLoop(true);
+    this.sfx.play()
 
+    // background Sprite
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
 
     let menuConfig = {
@@ -103,14 +105,17 @@ class Intro extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // dialogue
-    // this.script = new dialogueBoxBundle(this, [
-    //   ['JULES', 'So, tell me about hash.']
-    // ], true)
+    this.script = new dialogBoxBundle(this, [
+      ['left', 'So, tell me about hash.'],
+      ['end', "test"]
+    ], true)
 
   }
 
 
   update(){
+    this.script.update()
+
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
       //console.log('bruh');
