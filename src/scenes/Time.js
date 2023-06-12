@@ -3,14 +3,7 @@ class Time extends Phaser.Scene {
     super("timeScene");
   }
 
-
   create() {
-    // hint panel
-    // this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
-    // this.tutorialPanel.setScale(2, .7);
-    // this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
-    // this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
-
     //sound
     this.sfx = this.sound.add('driving');
     this.sfx.setLoop(true);
@@ -18,7 +11,7 @@ class Time extends Phaser.Scene {
 
     //Background Road
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
-    this.vignette = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'vignette').setOrigin(0, 0).setScale(0, 2.05);
+    this.vignette = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'vignette').setOrigin(0, 0).setScale(2.05).setDepth(3);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -32,9 +25,8 @@ class Time extends Phaser.Scene {
       }
     }
 
-    //this.add.text(game.config.width/2, game.config.height/1.4, 'Level 2: The Rush\n\nSPACE to continue', menuConfig).setOrigin(0.5);
-    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
-    this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5);
+    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5).setDepth(5);
+    this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5).setDepth(5);
 
     // Player Car Setup
     this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'redCar').setOrigin(0.5, 0.5);
@@ -94,10 +86,10 @@ class Time extends Phaser.Scene {
     }, null, this);
 
     // hint panel
-    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(5);
     this.tutorialPanel.setScale(2, .7);
-    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
-    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5).setDepth(5);
+    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5).setDepth(5);
 
     // dialogue
     this.script = new dialogBoxBundle(this, [

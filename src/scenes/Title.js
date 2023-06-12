@@ -35,6 +35,9 @@ class Title extends Phaser.Scene {
 
         // define keys
         cursors = this.input.keyboard.createCursorKeys(); 
+        key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
         
         // show menu text
         menuConfig.backgroundColor = 'cyan';
@@ -60,6 +63,15 @@ class Title extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
             this.scene.start('introScene');    
+        }
+        if (Phaser.Input.Keyboard.JustDown(key1)) {    
+            this.scene.start('introScene');    
+        }
+        if (Phaser.Input.Keyboard.JustDown(key2)) {    
+            this.scene.start('timeScene');    
+        }
+        if (Phaser.Input.Keyboard.JustDown(key3)) {    
+            this.scene.start('stealthScene');    
         }
     }
 }
