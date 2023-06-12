@@ -45,7 +45,7 @@ class Intro extends Phaser.Scene {
       }
     }
     //  this.add.text(game.config.width/2, game.config.height/1.4, 'Level 1: The Drive\n\nSPACE to continue', menuConfig).setOrigin(0.5);
-    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
+    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5).setDepth(3);
 
 
     this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'whiteCar').setOrigin(0.5, 0.5);
@@ -140,14 +140,23 @@ class Intro extends Phaser.Scene {
 
 
   update(){
-    this.script.update()
+    // this.script.update()
 
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
-      //console.log('bruh');
       this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
       this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
       this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
+    }
+    
+    //if hint is not showing, then show dialog
+    if (this.tutorialPanel.alpha === 0) {
+      this.script.leftBox.show()
+      this.script.rightBox.show()
+      this.script.update();
+    } else {
+      this.script.leftBox.hide()
+      this.script.rightBox.hide()
     }
     
     // if (!this.screenFadeing) this.dialog.update();

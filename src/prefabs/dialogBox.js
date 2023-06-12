@@ -7,11 +7,12 @@ class Dialog {
         let bubbleType = '';
         let textOffset = {x: 0, y: 0};
         let arrowOffset = {x: 0, y: 110};
+        this.DEFAULT_ALPHA = .85;
 
 
         if (side == 'left') {
-            x = (game.config.width / 5) + 40
-            y = inFocus ? game.config.height / 2 : (game.config.height * 5/6) - 61
+            x = game.config.width/4
+            y = inFocus ? game.config.height / 2 : (game.config.height * 5/6)
             bubbleType = 'jules';
             // textOffset.x += 20
             // textOffset.y += 40
@@ -20,7 +21,7 @@ class Dialog {
 
         } else if (side == 'right') {
             x = game.config.width * 3/4
-            y = inFocus ? game.config.height / 2 : (game.config.height * 5/6) - 61
+            y = inFocus ? game.config.height / 2 : (game.config.height * 5/6)
             bubbleType = 'vince'
             // textOffset.x -= 10
             // textOffset.y += 40
@@ -40,7 +41,7 @@ class Dialog {
         }
         
         this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5).setScale(4.5, 5.5);
-        this.image.setAlpha(1).setDepth(50);
+        this.image.setAlpha(this.DEFAULT_ALPHA).setDepth(50);
 
         if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset.x, y + textOffset.y, "dialogB", '', 30).setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
         else {
@@ -69,6 +70,10 @@ class Dialog {
 
     }
 
+    get finished (){
+        return this.DialogToDisplayQ.isEmpty && !this.isTyping && !this.isWaiting
+    }
+
     addText(body, speed = this.textSpeed) {
         this.show()
         if (this.isTyping) {
@@ -88,7 +93,10 @@ class Dialog {
         this.displaySlowTextR(fullText, textSpeeeeeed, 0);
         let timeToType = fullText.length * textSpeeeeeed * 2;
         this.typingTimer = this.scene.time.delayedCall(timeToType, () => {console.log('done writing'); this.isWaiting = true; this.isTyping = false}, null, this.scene)
-              
+        this.textdelay = this.scene.time.delayedCall(timeToType + 3000, () => {
+            this.isWaiting = false
+            if (!this.DialogToDisplayQ.isEmpty) this.displaySlowText(this.DialogToDisplayQ.dequeue(), this.textSpeed) 
+        }, null, this.scene);     
     }
 
     displaySlowTextR(fullText, textSpeeeeeed, textIndex) {
@@ -110,6 +118,8 @@ class Dialog {
     }
 
     hide(instantly = false) {
+        if (this.isHidden) return;
+        
         if (instantly) {
             this.image.alpha = 0;
             this.boxText.alpha = 0;
@@ -138,15 +148,17 @@ class Dialog {
 
     show(instantly = false) {
 
-        if(this.isHidden === true) {
+        if(this.isHidden) {
             this.image.alpha = 0;
             this.boxText.alpha = 0;
             this.waitArrow.alpha = 0;
             if (this.side == 'center') this.oldText.alpha = 0;
+        } else {
+            return;
         }
 
         if(instantly){
-            this.image.alpha = 1;
+            this.image.alpha = this.DEFAULT_ALPHA;
             this.boxText.alpha = 1;
             this.waitArrow.alpha = 1;
             if (this.side == 'center') this.oldText.alpha = .5;
@@ -156,7 +168,7 @@ class Dialog {
         if (this.side == 'center'){
             this.scene.tweens.add({
                 targets: [this.image, this.boxText, this.waitArrow],
-                alpha: 1,
+                alpha: this.DEFAULT_ALPHA,
                 ease: 'Quad.InOut',
                 duration: 500,
             });
@@ -170,7 +182,7 @@ class Dialog {
         } else {
             this.scene.tweens.add({
                 targets: [this.image, this.boxText, this.waitArrow],
-                alpha: 1,
+                alpha: this.DEFAULT_ALPHA,
                 ease: 'Quad.InOut',
                 duration: 500,
             });
@@ -276,9 +288,6 @@ class Dialog {
         this.y = target
     }
 
-    get finished (){
-        return this.DialogToDisplayQ.isEmpty && !this.isTyping
-    }
 
     
 }

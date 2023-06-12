@@ -113,19 +113,27 @@ class Time extends Phaser.Scene {
       ['right', `VINCENT: Too late! Already here!`],
       ['left', `LANCE: What!?`], 
       ['end', "convo"]
-    ], true)
+    ])
     
   }
 
 
   update(){
-    this.script.update()
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
-      //console.log('bruh');
       this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
       this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
       this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
+    }
+
+    //if hint is not showing, then show dialog
+    if (this.tutorialPanel.alpha === 0) {
+      this.script.leftBox.show()
+      this.script.rightBox.show()
+      this.script.update();
+    } else {
+      this.script.leftBox.hide()
+      this.script.rightBox.hide()
     }
 
     // check for lose condition

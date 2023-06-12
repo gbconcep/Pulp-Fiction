@@ -133,14 +133,13 @@ class Stealth extends Phaser.Scene {
       ['left', `JULES: Jimmie! How you doin, man it Jules.`],
       ['left', `JULES: Me and a friend need to use your garage for a couple hours...`],
       ['end', "convo"]
-    ], true)
+    ])
 
     this.cop = new Police(this, 200, this.playerCar.detectionZone);
   }
 
 
   update(){
-    this.script.update();
     this.cop.update();
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
@@ -148,6 +147,16 @@ class Stealth extends Phaser.Scene {
       this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
       this.tutorialText.alpha = this.tutorialText.alpha == 1 ? 0 : 1;
       this.tutorialTip.alpha = this.tutorialTip.alpha == 1 ? 0 : 1;
+    }
+
+    //if hint is not showing, then show dialog
+    if (this.tutorialPanel.alpha === 0) {
+      this.script.leftBox.show()
+      this.script.rightBox.show()
+      this.script.update();
+    } else {
+      this.script.leftBox.hide()
+      this.script.rightBox.hide()
     }
 
     // check for lose condition

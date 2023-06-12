@@ -24,7 +24,7 @@ class dialogBoxBundle {
     update(){
         if (this.unusable || this.paused) return;
         if (this.scriptIndex == -1) this.cycleScript();
-        if (this.activeBox.isWaiting && !this.activeBox.isTweening) this.activeBox.createArrowBounce();
+        //if (this.activeBox.isWaiting && !this.activeBox.isTweening) this.activeBox.createArrowBounce();
 
         
         // Code for if we want a pointer CLICK to also advance the dialog
@@ -44,18 +44,20 @@ class dialogBoxBundle {
 
         // Code for advancing the dialog boxes with SPACE
 
-        if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.space)) {
-            //console.log("space pressed")              DEBUG COMMENT
-            this.activeBox.waitArrow.removeFromDisplayList()
-            if (this.activeBox.isTyping) this.activeBox.showTextFlag = true;
-                else if(this.activeBox.DialogToDisplayQ.isEmpty && this.nextInstruction !== 'end')this.cycleScript();
-                else if (this.activeBox.finished && this.nextInstruction === 'end') {
-                    this.lastBoxClicked = true;
-                    this.activeBox.isTyping = true;
-                    this.unusable = true;
-                }
-                else this.activeBox.click();
-        }
+        // if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.space)) {
+        //     //console.log("space pressed")              DEBUG COMMENT
+        //     this.activeBox.waitArrow.removeFromDisplayList()
+        //     if (this.activeBox.isTyping) this.activeBox.showTextFlag = true;
+        //         else if(this.activeBox.DialogToDisplayQ.isEmpty && this.nextInstruction !== 'end')this.cycleScript();
+        //         else if (this.activeBox.finished && this.nextInstruction === 'end') {
+        //             this.lastBoxClicked = true;
+        //             this.activeBox.isTyping = true;
+        //             this.unusable = true;
+        //         }
+        //         else this.activeBox.click();
+        // }
+
+        if (this.activeBox.finished) this.cycleScript();
 
     }
 
