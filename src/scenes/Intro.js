@@ -19,9 +19,6 @@ class Intro extends Phaser.Scene {
       ])
     });
 
-
-
-
     // hint panel
     this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
     this.tutorialPanel.setScale(2, .7);
@@ -106,10 +103,38 @@ class Intro extends Phaser.Scene {
 
     // dialogue
     this.script = new dialogBoxBundle(this, [
-      ['left', 'So, tell me about hash.'],
-      ['end', "test"]
+      ['left', 'JULES: Okay so, tell me about the hash bars'],
+      ['right', 'VINCENT: What do you wanna know?'],
+      ['left', 'JULES: Well hash is legal here right?'],
+      ['right', 'VINCENT: Yeah its legal but it ain 100% legal'],
+      ['right', 'VINCENT: You cant roll into a restaurant and start puffing away'],
+      ['right', 'VINCENT: Only your home and certain designated places'],
+      ['left', 'JULES: Those are hash bars?'],
+      ['right', 'VINCENT: Let me break it down like this...'], 
+      ['right', 'VINCENT: its legal to buy it, its legal to own it and...'],
+      ['right', 'VINCENT: if youre the proprietor, its legal to sell it'],
+      ['right', 'VINCENT: Its legal to carry it, which doesnt really matter cause'],
+      ['right', 'VINCENT: get a load of this, if the cops stop you, its illegal for them to search you.'],
+      ['right', 'VINCENT: Searching you is a right that Amsterdam cops dont have.'],
+      ['left', 'JULES: Haha! And thats all there is to it!'],
+      ['right', 'VINCENT: You would dig it the most. But you know the craziest thing about Europe?'],
+      ['left', 'JULES: Whats that?'],
+      ['right', 'VINCENT: Its the little differences.'],
+      ['right', 'VINCENT: They have a lot of the same stuff, but theyre a little different.'],
+      ['left', 'JULES: Examples?'],
+      ['right', 'VINCENT: In Amsterdam, they let you by a beer at a movie theatre. Like a full glass of beer.'],
+      ['right', 'VINCENT: In Paris, they let you buy a beer at McDonalds.'],
+      ['right', 'VINCENT: Actually, you know what they call a Quarter Pounder with Cheese in Paris?'],
+      ['left', 'JULES: They dont call it a Quarter Pounder with Cheese?'],
+      ['right', 'VINCENT: Nah they use the metric system over there. They dont know what a Quarter pounder is.'],
+      ['left', 'JULES: What they call it?'],
+      ['right', 'VINCENT: Royale with Cheese.'],
+      ['left', 'JULES: Royale with Cheese. Whatd they call a Big Mac?'],
+      ['right', 'VINCENT: A Big Macs a Big Mac, but over there they call it *Le Big Mac*'],
+      ['left', 'JULES: What they call a Whopper?'],
+      ['right', 'VINCENT: I dunno. I didnt go into Burger King.'],
+      ['end', "convo"]
     ], true)
-
   }
 
 

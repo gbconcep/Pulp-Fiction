@@ -1,3 +1,6 @@
+// Pulp Fiction
+// Game by Alex Groff and Gavin Concepcion
+
 let config = {
   type: Phaser.AUTO,
   width: 800,
@@ -14,5 +17,5 @@ let config = {
 let game = new Phaser.Game(config);
 
 // keyboard variables
-let keyUP, keyDOWN, key1, key2, keyH;
+let keyUP, keyDOWN, key1, key2, key3, keyH;
 let cursors = null;

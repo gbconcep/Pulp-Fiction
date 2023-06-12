@@ -6,10 +6,10 @@ class Time extends Phaser.Scene {
 
   create() {
     // hint panel
-    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
-    this.tutorialPanel.setScale(2, .7);
-    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
-    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
+    // this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+    // this.tutorialPanel.setScale(2, .7);
+    // this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
+    // this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
     //sound
     this.sfx = this.sound.add('driving');
@@ -18,6 +18,7 @@ class Time extends Phaser.Scene {
 
     //Background Road
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
+    this.vignette = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'vignette').setOrigin(0, 0).setScale(0, 2.05);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -71,14 +72,11 @@ class Time extends Phaser.Scene {
       }
     );
     
-    
-    
     this.timeAlive = 0;
     this.distance = 0;    
     this.carInvulnerable = false;
     this.carDamaged = false;
     this.timeLeft = 60;
-
 
     // Player Input
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -95,11 +93,41 @@ class Time extends Phaser.Scene {
   
     }, null, this);
 
+    // hint panel
+    this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
+    this.tutorialPanel.setScale(2, .7);
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5)
+    this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
+    // dialogue
+    this.script = new dialogBoxBundle(this, [
+      ['left', 'JULES: Hello, do you know how late it is? Youre not supposed to be callin me this late.'],
+      ['right', 'VINCENT: Lance, this is Vincent! Im driving to your place right now!!'],
+      ['left', 'LANCE: Whoa, hold you horses man, whats the problem?'],
+      ['right', 'VINCENT: You still got an adrenaline shot?'],
+      ['left', 'LANCE: ...maybe.'],
+      ['right', 'VINCENT: I need it, man, I got a chick D.O.ing on me!'],
+      ['left', 'LANCE: Well, dont bring her here man!'],
+      ['left', 'LANCE: Im not kidding man! Dont you bring some-'],
+      ['right', 'VINCENT: No choice.'],
+      ['left', 'LANCE: Shes O.D.ing??'],
+      ['right', 'VINCENT: Yeah, shes dyin.'],
+      ['left', 'LANCE: Then bite the bullet, take her to a hospital, and caall a lawyer!'],
+      ['right', 'VINCENT: Negative.'],
+      ['left', 'LANCE: She aint my problem, you did this to her, you deal with it!'], 
+      ['left', 'LANCE: ...are you talking to me on a cellular phone?'], 
+      ['right', 'VINCENT: Yeah-'],
+      ['left', 'LANCE: I dont know you, who is this, dont come here, Im hanging up!'], 
+      ['right', 'VINCENT: Too late! Already here!'],
+      ['left', 'LANCE: What!?'], 
+      ['end', "convo"]
+    ], true)
+    
   }
 
 
   update(){
+    this.script.update()
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
       //console.log('bruh');
