@@ -77,10 +77,10 @@ class Stealth extends Phaser.Scene {
       delay: 1500,
       callback: () => {
         console.log("added car");
-        if (spawnCount % 2 === 0) {
-          this.carGroup.add(new Car(this));
+        if (spawnCount % 4 === 0) {
+          this.carGroup.add(new Police(this, 250, this.playerCar.detectionZone));
         } else {
-          this.carGroup.add(new Police(this, 175, this.playerCar.detectionZone));
+          this.carGroup.add(new Car(this));
         }
         spawnCount++;
       },

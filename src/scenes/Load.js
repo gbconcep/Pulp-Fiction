@@ -33,6 +33,7 @@ class Load extends Phaser.Scene {
         this.load.image('aquaCar', 'aqua-car.png');
         this.load.image('textbox', 'text-box.png');
         this.load.image('vignette', 'vignette.png');
+        this.load.image('lights', 'Headlights.png');
 
         // Dialog Boxes
         this.load.image('dialoguebox', 'dialogue-box.png');

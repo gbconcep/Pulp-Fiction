@@ -47,13 +47,14 @@ class Time extends Phaser.Scene {
     this.playerCar.setDebugBodyColor(0xFFFF00);
     this.playerCar.setCollideWorldBounds(true);
     this.playerCar.setBounceY(.3).setDrag(900);
-    this.playerCar.setDepth(10);
+    this.playerCar.setDepth(2);
     this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 4;
     this.GOAL = 2000;
-    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
+    this.lights = this.add.sprite(this.playerCar.x, this.playerCar.y, 'lights').setDepth(3);    
+    
 
     //Testing Night-like visuals w the Camera
     //this.cameras.main.postFX.addVignette()
@@ -130,6 +131,9 @@ class Time extends Phaser.Scene {
 
 
   update(){
+
+    this.lights.setPosition(this.playerCar.x, this.playerCar.y - 50);
+
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
       this.tutorialPanel.alpha = this.tutorialPanel.alpha == 1 ? 0 : 1;
@@ -191,8 +195,6 @@ class Time extends Phaser.Scene {
     // }
 
     // colision detection
-    this.playerCar.detectionZone.x = this.playerCar.x;
-    this.playerCar.detectionZone.y = this.playerCar.y
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
     

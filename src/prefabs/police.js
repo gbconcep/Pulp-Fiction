@@ -19,18 +19,12 @@ class Police extends Car {
         this.graphicEngine = ge;
         this.zone = zone;
         this.detectionLevel = detectionLevel;
-        this.detectionRadius = detectionRadius;
+        this.r = r;
         this.playerZone = playerZone;
 
     }
 
     update() {
-        // destroy car if it reaches past the bottom edge of the screen
-        if(game.config.height + 100 < this.y) {
-            this.destroy();
-        }
-
-
         this.zone.x = this.x;
         this.zone.y = this.y;
         
@@ -38,8 +32,11 @@ class Police extends Car {
         //console.log("zone 1 - x: " + this.zone.x + "     y: " + this.zone.y)
 
         this.graphicEngine.clear();
-        this.graphicEngine.fillStyle(0xFF0000, this.detectionLevel/100);
+        this.graphicEngine.fillStyle(0xFF4444, this.detectionLevel/150);
         this.graphicEngine.fillCircleShape(this.zone);
+        this.graphicEngine.fillStyle(0xFF0000, this.detectionLevel/150);
+        let temp = new Phaser.Geom.Circle(this.x, this.y, ((this.r/150) * this.detectionLevel))
+        this.graphicEngine.fillCircleShape(temp);
         //this.graphicEngine.strokeCircleShape(this.zone, 64);
 
 
@@ -48,12 +45,18 @@ class Police extends Car {
         if(this.foundPlayer) this.scene.scene.start('titleScene');
 
         if (this.playerZone != null) this.isOverlapping(this.playerZone);
+
+        // destroy car if it reaches past the bottom edge of the screen
+        if(game.config.height + 100 < this.y) {
+            this.graphicEngine.clear();
+            this.destroy();
+        }
     }
 
     isOverlapping(objCircleZone) {
         if (Phaser.Geom.Intersects.CircleToCircle(this.zone, objCircleZone)){
             console.log("overlap");
-            if (this.detectionLevel < 100) this.detectionLevel += 2;
+            if (this.detectionLevel < 150) this.detectionLevel += 2;
             else this.foundPlayer = true;
             return true;
         }

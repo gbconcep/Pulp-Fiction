@@ -7,7 +7,7 @@ class Dialog {
         let bubbleType = '';
         let textOffset = {x: 0, y: 0};
         let arrowOffset = {x: 0, y: 110};
-        this.DEFAULT_ALPHA = .85;
+        this.DEFAULT_ALPHA = .75;
 
 
         if (side == 'left') {
