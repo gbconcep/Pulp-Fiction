@@ -1,5 +1,5 @@
 class Police extends Car {
-    constructor (scene, r = 150, playerZone = null, lane = false) {
+    constructor (scene, r = 200, playerZone = null, lane = false) {
         let carAssets = ['blackPolice', 'bluePolice'];
 
         
@@ -10,12 +10,13 @@ class Police extends Car {
 
 
         let foundPlayer = false;
+        let ge = scene.add.graphics();
         
         super(scene, lane, Phaser.Utils.Array.GetRandom(carAssets));
         this.setOrigin(.5);
 
         this.foundPlayer = foundPlayer;
-        this.graphicEngine = scene.add.graphics();
+        this.graphicEngine = ge;
         this.zone = zone;
         this.detectionLevel = detectionLevel;
         this.detectionRadius = detectionRadius;

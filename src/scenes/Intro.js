@@ -135,7 +135,7 @@ class Intro extends Phaser.Scene {
 
 
   update(){
-    // this.script.update()
+    // console.log(this.input.mousePointer.x + "      " + this.input.mousePointer.y);
 
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
@@ -175,7 +175,7 @@ class Intro extends Phaser.Scene {
 
     // speed updates
     this.road.tilePositionY -= this.speed;
-    if (this.speed < 10)this.speed += .005
+    if (this.speed < 7)this.speed += .005
 
 
     // debug scene skip w SPACE

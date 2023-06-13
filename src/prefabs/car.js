@@ -3,13 +3,13 @@ class Car extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, lane = false, asset = null) {
 
         let carAssets = ['orangeCar', 'yellowCar', 'greenCar', 'aquaCar', 'purpleCar'];   
-        let carSpawn = lane ? lane : Phaser.Utils.Array.GetRandom([100, 300, 500, 700]);
+        let carSpawn = lane ? lane : Phaser.Utils.Array.GetRandom([133, 320, 475, 663]);
 
         // Randomly select a car asset
         let carAsset = asset ? asset : Phaser.Utils.Array.GetRandom(carAssets);
 
         // call Phaser Physics Sprite constructor
-        super(scene, carSpawn + (Math.random()*80 - 40), -50, carAsset); 
+        super(scene, carSpawn + (Math.random()*60 - 30), -50, carAsset); 
         
         this.parentScene = scene;
 
@@ -29,7 +29,7 @@ class Car extends Phaser.Physics.Arcade.Sprite {
     }
 
     cleanup() {
-        
+
     }
 
 }

@@ -21,7 +21,7 @@ class Time extends Phaser.Scene {
     this.sfx.play()
 
     //Background Road
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
     this.vignette = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'vignette').setOrigin(0, 0).setScale(2.05).setDepth(3);
 
     let menuConfig = {
@@ -40,7 +40,7 @@ class Time extends Phaser.Scene {
     this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5).setDepth(5);
 
     // Player Car Setup
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'redCar').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'redCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  
     this.playerCar.body.onOverlap = true;      
@@ -51,7 +51,7 @@ class Time extends Phaser.Scene {
     this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
-    this.speed = 2;
+    this.speed = 4;
     this.GOAL = 2000;
     this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 100);
 

@@ -28,7 +28,7 @@ class Stealth extends Phaser.Scene {
     this.sfx.play()
 
     // Background Road
-    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'road').setOrigin(0,0).setScale(2.05);
+    this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
 
     let menuConfig = {
       fontFamily: 'Arial',
@@ -48,7 +48,7 @@ class Stealth extends Phaser.Scene {
 
 
     // Player Car Setup
-    this.playerCar = this.physics.add.sprite(game.config.width/3, game.config.height/2, 'bloodCar').setOrigin(0.5, 0.5);
+    this.playerCar = this.physics.add.sprite(game.config.width/1.5, game.config.height/2, 'bloodCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
     this.playerCar.body.onWorldBounds = true;  
     this.playerCar.body.onOverlap = true;      
@@ -59,7 +59,7 @@ class Stealth extends Phaser.Scene {
     this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
-    this.speed = 2;
+    this.speed = 3;
     this.GOAL = 2000;
     this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 20);
 
@@ -80,7 +80,7 @@ class Stealth extends Phaser.Scene {
         if (spawnCount % 2 === 0) {
           this.carGroup.add(new Car(this));
         } else {
-          this.carGroup.add(new Police(this, 150, this.playerCar.detectionZone));
+          this.carGroup.add(new Police(this, 175, this.playerCar.detectionZone));
         }
         spawnCount++;
       },
@@ -146,13 +146,10 @@ class Stealth extends Phaser.Scene {
       ['left', `JULES: Me and a friend need to use your garage for a couple hours...`],
       ['end', "convo"]
     ], false, 'jules', 'vince')
-
-    this.cop = new Police(this, 200, this.playerCar.detectionZone);
   }
 
 
   update(){
-    this.cop.update();
     // hint toggle
     if (Phaser.Input.Keyboard.JustDown(this.cursors.shift)) {
       //console.log('bruh');
