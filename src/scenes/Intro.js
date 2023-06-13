@@ -65,7 +65,7 @@ class Intro extends Phaser.Scene {
 
 
     this.speed = 2;
-    this.GOAL = 1000;
+    this.GOAL = 2000;
 
 
     // Car obstacles
@@ -134,7 +134,7 @@ class Intro extends Phaser.Scene {
       ['left', `JULES: What they call a Whopper?`],
       ['right', `VINCENT: I dunno. I didnt go into Burger King.`],
       ['end', "convo"]
-    ]);
+    ], false, 'jules', 'vince');
 
   }
 
@@ -151,8 +151,7 @@ class Intro extends Phaser.Scene {
     
     //if hint is not showing, then show dialog
     if (this.tutorialPanel.alpha === 0) {
-      this.script.leftBox.show()
-      this.script.rightBox.show()
+      this.script.activeBox.show()
       this.script.update();
     } else {
       this.script.leftBox.hide()

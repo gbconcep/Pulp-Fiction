@@ -133,7 +133,7 @@ class Stealth extends Phaser.Scene {
       ['left', `JULES: Jimmie! How you doin, man it Jules.`],
       ['left', `JULES: Me and a friend need to use your garage for a couple hours...`],
       ['end', "convo"]
-    ])
+    ], false, 'jules', 'vince')
 
     this.cop = new Police(this, 200, this.playerCar.detectionZone);
   }
@@ -151,8 +151,7 @@ class Stealth extends Phaser.Scene {
 
     //if hint is not showing, then show dialog
     if (this.tutorialPanel.alpha === 0) {
-      this.script.leftBox.show()
-      this.script.rightBox.show()
+      this.script.activeBox.show()
       this.script.update();
     } else {
       this.script.leftBox.hide()

@@ -93,7 +93,7 @@ class Time extends Phaser.Scene {
 
     // dialogue
     this.script = new dialogBoxBundle(this, [
-      ['left', `JULES: Hello, do you know how late it is? You're not supposed to be callin' me this late.`],
+      ['left', `LANCE: Hello, do you know how late it is? You're not supposed to be callin' me this late.`],
       ['right', `VINCENT: Lance, this is Vincent! Im driving to your place right now!!`],
       ['left', `LANCE: Whoa, hold your horses man, whats the problem?`],
       ['right', `VINCENT: You still got an adrenaline shot?`],
@@ -113,7 +113,7 @@ class Time extends Phaser.Scene {
       ['right', `VINCENT: Too late! Already here!`],
       ['left', `LANCE: What!?`], 
       ['end', "convo"]
-    ])
+    ], false, 'lance', 'vince')
     
   }
 
@@ -128,8 +128,7 @@ class Time extends Phaser.Scene {
 
     //if hint is not showing, then show dialog
     if (this.tutorialPanel.alpha === 0) {
-      this.script.leftBox.show()
-      this.script.rightBox.show()
+      this.script.activeBox.show()
       this.script.update();
     } else {
       this.script.leftBox.hide()

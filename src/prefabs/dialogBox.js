@@ -1,6 +1,6 @@
 class Dialog {
 
-    constructor(scene, side, textSpeed = 30, inFocus = false, bodyText = '') {
+    constructor(scene, side, textSpeed = 30, inFocus = false, bodyText = '', backgroundAsset = null) {
 
         let x, y;
         let textWidth = (side === 'center' ? game.config.width * 4/5 : 300)
@@ -40,6 +40,7 @@ class Dialog {
             console.log('Undifined Side on Dialog Box with :' + bodyText)
         }
         
+        bubbleType = backgroundAsset === null ? bubbleType : backgroundAsset;
         this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5).setScale(4.5, 5.5);
         this.image.setAlpha(this.DEFAULT_ALPHA).setDepth(50);
 
@@ -93,7 +94,7 @@ class Dialog {
         this.displaySlowTextR(fullText, textSpeeeeeed, 0);
         let timeToType = fullText.length * textSpeeeeeed * 2;
         this.typingTimer = this.scene.time.delayedCall(timeToType, () => {console.log('done writing'); this.isWaiting = true; this.isTyping = false}, null, this.scene)
-        this.textdelay = this.scene.time.delayedCall(timeToType + 3000, () => {
+        this.textdelay = this.scene.time.delayedCall(timeToType + 1000, () => {
             this.isWaiting = false
             if (!this.DialogToDisplayQ.isEmpty) this.displaySlowText(this.DialogToDisplayQ.dequeue(), this.textSpeed) 
         }, null, this.scene);     

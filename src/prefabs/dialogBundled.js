@@ -1,9 +1,9 @@
 class dialogBoxBundle {
-    constructor(scene, script, inFocus = false){
+    constructor(scene, script, inFocus = false, leftAsset = null, rightAsset = null, centerAsset = null){
         this.scene = scene;
-        this.centerBox = new Dialog(scene, 'center', 20, inFocus);
-        this.rightBox = new Dialog(scene, 'right', 20, inFocus);
-        this.leftBox = new Dialog(scene, 'left', 20, inFocus);
+        this.centerBox = new Dialog(scene, 'center', 20, inFocus, '', centerAsset);
+        this.rightBox = new Dialog(scene, 'right', 20, inFocus, '', rightAsset);
+        this.leftBox = new Dialog(scene, 'left', 20, inFocus, '', leftAsset);
         this.centerBox.hide(true);
         this.leftBox.hide(true);
         this.rightBox.hide(true);
