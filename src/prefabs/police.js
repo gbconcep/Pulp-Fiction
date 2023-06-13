@@ -9,16 +9,13 @@ class Police extends Car {
         let zone = new Phaser.Geom.Circle(0, 0, r);        
 
 
-        let graphic = scene.add.graphics();
-        graphic.strokeCircleShape(zone, 64);
-
         let foundPlayer = false;
         
         super(scene, lane, Phaser.Utils.Array.GetRandom(carAssets));
         this.setOrigin(.5);
 
         this.foundPlayer = foundPlayer;
-        this.graphicEngine = graphic;
+        this.graphicEngine = scene.add.graphics();
         this.zone = zone;
         this.detectionLevel = detectionLevel;
         this.detectionRadius = detectionRadius;
@@ -61,6 +58,10 @@ class Police extends Car {
         }
 
         return false;
+    }
+
+    cleanup() {
+        this.graphicEngine.clear();
     }
 
 }

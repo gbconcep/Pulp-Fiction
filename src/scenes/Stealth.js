@@ -5,6 +5,17 @@ class Stealth extends Phaser.Scene {
 
 
   create() {
+
+    this.screenFadeing = true;
+    // fade scene in from black at start of scene
+    this.cam = this.cameras.main.fadeIn(4000, 0, 0, 0, null, this);
+
+    // enable player input after camera finished fading in
+    this.cam.on('camerafadeincomplete', () => {
+      this.input.keyboard.enabled = true;
+      this.screenFadeing = false;
+    });
+
     // hint panel
     this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
     this.tutorialPanel.setScale(2, .7);
@@ -50,6 +61,7 @@ class Stealth extends Phaser.Scene {
     this.CAR_VELOCITY = 50;
     this.speed = 2;
     this.GOAL = 2000;
+    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 20);
 
 
     // Car obstacles
@@ -68,7 +80,7 @@ class Stealth extends Phaser.Scene {
         if (spawnCount % 2 === 0) {
           this.carGroup.add(new Car(this));
         } else {
-          this.carGroup.add(new Police(this));
+          this.carGroup.add(new Police(this, 150, this.playerCar.detectionZone));
         }
         spawnCount++;
       },
@@ -202,6 +214,9 @@ class Stealth extends Phaser.Scene {
     //   this.sfx.stop()      
     // }
 
+    // colision detection
+    this.playerCar.detectionZone.x = this.playerCar.x;
+    this.playerCar.detectionZone.y = this.playerCar.y
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
     
@@ -213,9 +228,15 @@ class Stealth extends Phaser.Scene {
     // set car frequency with the constant val
     this.carSpawnDelay.delay = 4000 / this.speed
 
-    if (this.distance >= this.GOAL) {
-      this.scene.start('titleScene');
-      this.sfx.stop();
+    // check win condition
+    if (this.distance >= this.GOAL && !this.screenFadeing) {
+      this.screenFadeing = true;
+      this.distanceRemainingText.removeFromDisplayList();   
+      this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
+      this.cam.on('camerafadeoutcomplete', () => {
+        this.scene.start('titleScene');
+        this.sfx.stop() 
+      })   
     }
   }
 
@@ -228,6 +249,7 @@ class Stealth extends Phaser.Scene {
             object1.alpha = 1;
         }, null, this);
     }
+    object2.cleanup()
     object2.destroy();
     if (this.speed > 3) this.speed = this.speed/2;      
   }

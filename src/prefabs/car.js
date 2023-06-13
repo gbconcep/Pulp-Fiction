@@ -28,4 +28,8 @@ class Car extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    cleanup() {
+        
+    }
+
 }

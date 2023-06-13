@@ -12,11 +12,6 @@ class Intro extends Phaser.Scene {
     this.cam.on('camerafadeincomplete', () => {
       this.input.keyboard.enabled = true;
       this.screenFadeing = false;
-      this.dialog = new dialogBoxBundle(this, [
-        ['left', "Basic starter text for the conversation"],
-        ['center', "Some other response to dialog"],
-        ['end', "convo"]
-      ])
     });
 
     // hint panel
@@ -60,7 +55,7 @@ class Intro extends Phaser.Scene {
     this.playerCar.body.setSize(60);
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
-    this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 20);
+    this.playerCar.detectionZone = new Phaser.Geom.Circle(0, 0, 20);
 
 
 

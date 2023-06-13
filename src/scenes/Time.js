@@ -4,6 +4,17 @@ class Time extends Phaser.Scene {
   }
 
   create() {
+
+    this.screenFadeing = true;
+    // fade scene in from black at start of scene
+    this.cam = this.cameras.main.fadeIn(4000, 0, 0, 0, null, this);
+
+    // enable player input after camera finished fading in
+    this.cam.on('camerafadeincomplete', () => {
+      this.input.keyboard.enabled = true;
+      this.screenFadeing = false;
+    });
+
     //sound
     this.sfx = this.sound.add('driving');
     this.sfx.setLoop(true);
@@ -180,6 +191,8 @@ class Time extends Phaser.Scene {
     // }
 
     // colision detection
+    this.playerCar.detectionZone.x = this.playerCar.x;
+    this.playerCar.detectionZone.y = this.playerCar.y
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
     
@@ -191,9 +204,15 @@ class Time extends Phaser.Scene {
     // set car frequency with the constant val
     this.carSpawnDelay.delay = 4000 / this.speed
 
-    if (this.distance >= this.GOAL) {
-      this.scene.start('titleScene');
-      this.sfx.stop();
+    // check win condition
+    if (this.distance >= this.GOAL && !this.screenFadeing) {
+      this.screenFadeing = true;
+      this.distanceRemainingText.removeFromDisplayList();   
+      this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
+      this.cam.on('camerafadeoutcomplete', () => {
+        this.scene.start('stealthScene');
+        this.sfx.stop() 
+      })   
     }
   }
 
