@@ -29,10 +29,10 @@ class Intro extends Phaser.Scene {
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
 
     let menuConfig = {
-      fontFamily: 'Arial',
+      fontFamily: 'Courier',
       fontSize: '30px',
-      backgroundColor: 'cyan',
-      color: 'purple',
+      backgroundColor: 'white',
+      color: 'cyan',
       align: 'center',
       padding: {
       top: 5,

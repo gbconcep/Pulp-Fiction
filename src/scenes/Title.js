@@ -21,10 +21,10 @@ class Title extends Phaser.Scene {
             fixedWidth: 0
         }
         let directionConfig = {
-            fontFamily: 'Arial',
+            fontFamily: 'Courier',
             fontSize: '20px',
-            backgroundColor: 'cyan',
-            color: 'purple',
+            backgroundColor: 'yellow',
+            color: 'red',
             align: 'right',
             padding: {
             top: 5,

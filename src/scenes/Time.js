@@ -25,10 +25,10 @@ class Time extends Phaser.Scene {
     this.vignette = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'vignette').setOrigin(0, 0).setScale(2.05).setDepth(3);
 
     let menuConfig = {
-      fontFamily: 'Arial',
+      fontFamily: 'Courier',
       fontSize: '30px',
-      backgroundColor: 'cyan',
-      color: 'purple',
+      backgroundColor: 'red',
+      color: 'black',
       align: 'center',
       padding: {
       top: 5,

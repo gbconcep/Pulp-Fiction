@@ -30,23 +30,6 @@ class Stealth extends Phaser.Scene {
     // Background Road
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
 
-    let menuConfig = {
-      fontFamily: 'Arial',
-      fontSize: '30px',
-      backgroundColor: 'cyan',
-      color: 'purple',
-      align: 'center',
-      padding: {
-      top: 5,
-      bottom: 5,
-      }
-    }
-
-    //this.add.text(game.config.width/2, game.config.height/1.4, 'Level 2: The Rush\n\nSPACE to continue', menuConfig).setOrigin(0.5);
-    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
-    this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5);
-
-
     // Player Car Setup
     this.playerCar = this.physics.add.sprite(game.config.width/1.5, game.config.height/2, 'bloodCar').setOrigin(0.5, 0.5);
     this.playerCar.body.onCollide = true;      // must be set for collision event to work
@@ -95,6 +78,23 @@ class Stealth extends Phaser.Scene {
     this.carInvulnerable = false;
     this.carDamaged = false;
     this.timeLeft = 60;
+
+    let menuConfig = {
+      fontFamily: 'Courier',
+      fontSize: '30px',
+      backgroundColor: 'white',
+      color: 'red',
+      align: 'center',
+      padding: {
+      top: 5,
+      bottom: 5,
+      }
+    }
+
+    //this.add.text(game.config.width/2, game.config.height/1.4, 'Level 2: The Rush\n\nSPACE to continue', menuConfig).setOrigin(0.5);
+    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
+    this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5);
+
 
     // basically a diy tween for easing movement into the scene at startup 
     // this.speedRamp = .3;
