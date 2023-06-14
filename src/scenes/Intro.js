@@ -176,14 +176,15 @@ class Intro extends Phaser.Scene {
 
 
     // debug scene skip w SPACE
-    if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) { 
-      this.distanceRemainingText.removeFromDisplayList();   
-      this.cam = this.cameras.main.fadeOut(2000, 0, 0, 0);
-      this.cam.on('camerafadeoutcomplete', () => {
-        this.scene.start('timeScene');
-        this.sfx.stop() 
-      })     
-    }
+    
+    // if (Phaser.Input.Keyboard.JustDown(this.cursors.space)) { 
+    //   this.distanceRemainingText.removeFromDisplayList();   
+    //   this.cam = this.cameras.main.fadeOut(2000, 0, 0, 0);
+    //   this.cam.on('camerafadeoutcomplete', () => {
+    //     this.scene.start('timeScene');
+    //     this.sfx.stop() 
+    //   })     
+    // }
 
     // colision detection
     this.playerCar.detectionZone.x = this.playerCar.x;

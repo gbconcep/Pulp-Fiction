@@ -41,7 +41,7 @@ class Dialog {
         }
         
         bubbleType = backgroundAsset === null ? bubbleType : backgroundAsset;
-        this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5).setScale(4.5, 5.5);
+        this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5).setScale(4.5, 6.5);
         this.image.setAlpha(this.DEFAULT_ALPHA).setDepth(50);
 
         if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset.x, y + textOffset.y, "dialogB", '', 30).setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);

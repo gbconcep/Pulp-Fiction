@@ -28,7 +28,11 @@ class Car extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    cleanup() {
+    collide() { // nothing special happens when a normal car collides with the player
+        return;
+    }
+
+    cleanup() { // nothing in the base car class needs to be cleaned up before deletion
 
     }
 

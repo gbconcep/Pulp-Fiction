@@ -2,23 +2,16 @@ class Police extends Car {
     constructor (scene, r = 200, playerZone = null, lane = false) {
         let carAssets = ['blackPolice', 'bluePolice'];
 
-        
-
-        let detectionRadius = r;
-        let detectionLevel = 0;
         let zone = new Phaser.Geom.Circle(0, 0, r);        
-
-
-        let foundPlayer = false;
         let ge = scene.add.graphics();
         
         super(scene, lane, Phaser.Utils.Array.GetRandom(carAssets));
         this.setOrigin(.5);
 
-        this.foundPlayer = foundPlayer;
+        this.foundPlayer = false;
         this.graphicEngine = ge;
         this.zone = zone;
-        this.detectionLevel = detectionLevel;
+        this.detectionLevel = 0;
         this.r = r;
         this.playerZone = playerZone;
 
@@ -47,7 +40,7 @@ class Police extends Car {
         if (this.playerZone != null) this.isOverlapping(this.playerZone);
 
         // destroy car if it reaches past the bottom edge of the screen
-        if(game.config.height + 100 < this.y) {
+        if(game.config.height + 300 < this.y) {
             this.graphicEngine.clear();
             this.destroy();
         }
@@ -63,8 +56,12 @@ class Police extends Car {
 
         return false;
     }
+    
+    collide() { // On collision with the player, Arrest them immidiately
+        //this.scene.scene.start('temp');
+    }
 
-    cleanup() {
+    cleanup() { // clear the graphics engine so when the car is deleted, the detection ring dissapears too
         this.graphicEngine.clear();
     }
 

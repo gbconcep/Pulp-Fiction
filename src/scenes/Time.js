@@ -209,6 +209,7 @@ class Time extends Phaser.Scene {
     // check win condition
     if (this.distance >= this.GOAL && !this.screenFadeing) {
       this.screenFadeing = true;
+      this.clock.hasDispatched = true;
       this.distanceRemainingText.removeFromDisplayList();   
       this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
       this.cam.on('camerafadeoutcomplete', () => {

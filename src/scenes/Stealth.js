@@ -43,7 +43,7 @@ class Stealth extends Phaser.Scene {
     this.playerCar.body.onOverlap = true;
     this.CAR_VELOCITY = 50;
     this.speed = 3;
-    this.GOAL = 2000;
+    this.GOAL = 3000;
     this.playerCar.detectionZone = new Phaser.Geom.Circle(this.x, this.y, 20);
 
 
@@ -92,8 +92,8 @@ class Stealth extends Phaser.Scene {
     }
 
     //this.add.text(game.config.width/2, game.config.height/1.4, 'Level 2: The Rush\n\nSPACE to continue', menuConfig).setOrigin(0.5);
-    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5);
-    this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5);
+    this.distanceRemainingText = this.add.text(game.config.width/2, 50, '', menuConfig).setOrigin(0.5).setDepth(50);
+    this.timerText = this.add.text(game.config.width/2, 100, '', menuConfig).setOrigin(.5).setDepth(50);
 
 
     // basically a diy tween for easing movement into the scene at startup 
@@ -109,10 +109,10 @@ class Stealth extends Phaser.Scene {
     this.gameOver = false;
 
     // 60 sec play clock
-    this.clock = this.time.delayedCall(60000, () => {
+    this.clock = this.time.delayedCall(80000, () => {
         
-      this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", menuConfig).setOrigin(0.5);
-      this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) for Menu Screen', menuConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", menuConfig).setOrigin(0.5).setDepth(50);
+      this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) for Menu Screen', menuConfig).setOrigin(0.5).setDepth(50);
       this.gameOver = true;
   
     }, null, this);
@@ -228,6 +228,7 @@ class Stealth extends Phaser.Scene {
     // check win condition
     if (this.distance >= this.GOAL && !this.screenFadeing) {
       this.screenFadeing = true;
+      this.clock.hasDispatched = true;
       this.distanceRemainingText.removeFromDisplayList();   
       this.cam = this.cameras.main.fadeOut(3000, 0, 0, 0);
       this.cam.on('camerafadeoutcomplete', () => {
