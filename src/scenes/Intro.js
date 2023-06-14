@@ -162,7 +162,8 @@ class Intro extends Phaser.Scene {
         this.playerCar.body.velocity.y -= (this.CAR_VELOCITY);
     } else if(this.cursors.down.isDown) {
         this.playerCar.body.velocity.y += (this.CAR_VELOCITY);
-    }
+    } else this.playerCar.body.velocity.y = 30 * this.speed/2;
+
     if(this.cursors.left.isDown) {
         this.playerCar.body.velocity.x -= (this.CAR_VELOCITY);
     } else if(this.cursors.right.isDown) {

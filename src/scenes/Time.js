@@ -91,7 +91,8 @@ class Time extends Phaser.Scene {
 
     // 60 sec play clock
     this.clock = this.time.delayedCall(60000, () => {
-        
+      
+      this.scene.start('crashScene');
       this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", menuConfig).setOrigin(0.5);
       this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) for Menu Screen', menuConfig).setOrigin(0.5);
       this.gameOver = true;

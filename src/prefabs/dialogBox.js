@@ -12,29 +12,14 @@ class Dialog {
 
         if (side == 'left') {
             x = game.config.width/4
-            y = inFocus ? game.config.height / 2 : (game.config.height * 5/6)
+            y = game.config.height * 6/7
             bubbleType = 'jules';
-            // textOffset.x += 20
-            // textOffset.y += 40
-            // arrowOffset.x += 20
-            // arrowOffset.y += 80
+            
 
         } else if (side == 'right') {
             x = game.config.width * 3/4
-            y = inFocus ? game.config.height / 2 : (game.config.height * 5/6)
+            y = game.config.height * 6/7
             bubbleType = 'vince'
-            // textOffset.x -= 10
-            // textOffset.y += 40
-            // arrowOffset.x -= 10
-            // arrowOffset.y += 80
-
-
-        } else if (side == 'center'){
-            x = game.config.width / 2 
-            y = inFocus ? game.config.height / 2 : game.config.height * 4/5
-            bubbleType = 'lance'
-            // arrowOffset.y += 60;
-            // arrowOffset.x += 300;
 
         } else {
             console.log('Undifined Side on Dialog Box with :' + bodyText)
@@ -43,12 +28,7 @@ class Dialog {
         bubbleType = backgroundAsset === null ? bubbleType : backgroundAsset;
         this.image = scene.add.sprite(x, y, bubbleType).setOrigin(.5).setScale(4.5, 6.5);
         this.image.setAlpha(this.DEFAULT_ALPHA).setDepth(50);
-
-        if (side !== 'center') this.boxText = scene.add.bitmapText(x + textOffset.x, y + textOffset.y, "dialogB", '', 30).setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
-        else {
-            this.boxText = scene.add.bitmapText(x, y + 75, "dialogB", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
-            this.oldText = scene.add.bitmapText(x, y - 65, "dialogB", '').setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50).setAlpha(.45);
-        }
+        this.boxText = scene.add.bitmapText(x + textOffset.x, y + textOffset.y, "dialogB", '', 30).setOrigin(0.5).setCenterAlign().setMaxWidth(textWidth).setDepth(50);
 
         this.waitArrow = scene.add.sprite(x + arrowOffset.x, y + arrowOffset.y, bubbleType === 'playerBubble' ? 'playerTri' : (bubbleType === 'grandBubble' || bubbleType === 'largeGrandBubble') ? 'grandTri' : null).setOrigin(.5);
         this.waitArrow.setDepth(100).removeFromDisplayList();
@@ -87,9 +67,6 @@ class Dialog {
     displaySlowText(fullText, textSpeeeeeed = this.textSpeed) {
         this.isTyping = true;
         this.isWaiting = false;
-        if (this.side == 'center') {
-            this.oldText.text = this.text;
-        }
         this.text = fullText;
         this.displaySlowTextR(fullText, textSpeeeeeed, 0);
         let timeToType = fullText.length * textSpeeeeeed * 2;
@@ -125,15 +102,7 @@ class Dialog {
             this.image.alpha = 0;
             this.boxText.alpha = 0;
             this.waitArrow.alpha = 0;
-            if (this.side == 'center') this.oldText.alpha = 0;
 
-        } else if (this.side == 'center') {
-            this.scene.tweens.add({
-                targets: [this.image, this.oldText, this.boxText, this.waitArrow],
-                alpha: 0,
-                ease: 'Quad.InOut',
-                duration: 500,
-            });
         } else {
             this.scene.tweens.add({
                 targets: [this.image, this.boxText, this.waitArrow],
@@ -144,7 +113,6 @@ class Dialog {
         }
 
         this.isHidden = true;
-         
     }
 
     show(instantly = false) {
@@ -153,7 +121,6 @@ class Dialog {
             this.image.alpha = 0;
             this.boxText.alpha = 0;
             this.waitArrow.alpha = 0;
-            if (this.side == 'center') this.oldText.alpha = 0;
         } else {
             return;
         }
@@ -162,32 +129,17 @@ class Dialog {
             this.image.alpha = this.DEFAULT_ALPHA;
             this.boxText.alpha = 1;
             this.waitArrow.alpha = 1;
-            if (this.side == 'center') this.oldText.alpha = .5;
             return;
         }
 
-        if (this.side == 'center'){
-            this.scene.tweens.add({
-                targets: [this.image, this.boxText, this.waitArrow],
-                alpha: this.DEFAULT_ALPHA,
-                ease: 'Quad.InOut',
-                duration: 500,
-            });
-
-            this.scene.tweens.add({
-                targets: this.oldText,
-                alpha: .5,
-                ease: 'Quad.InOut',
-                duration: 500,
-            });
-        } else {
-            this.scene.tweens.add({
-                targets: [this.image, this.boxText, this.waitArrow],
-                alpha: this.DEFAULT_ALPHA,
-                ease: 'Quad.InOut',
-                duration: 500,
-            });
-        }
+        
+        this.scene.tweens.add({
+            targets: [this.image, this.boxText, this.waitArrow],
+            alpha: this.DEFAULT_ALPHA,
+            ease: 'Quad.InOut',
+            duration: 500,
+        });
+        
 
         this.isHidden = false
     }
@@ -219,8 +171,8 @@ class Dialog {
     
     shift(target) {
         if(this.isTweening) return;
-        //console.log('shift')         DEBUG COMMENT
         this.isTweening = true;
+        //console.log('shift')         DEBUG COMMENT
 
         if (this.bounceTween != null) {
             this.bounceTween.complete();
@@ -232,60 +184,29 @@ class Dialog {
         }, null, this.scene);
 
         
-        if (this.side === 'center') {
-            if (target >= game.config.height * 4/5) target = game.config.height * 4/5;
-            this.scene.tweens.add({
-                targets: this.image,
-                y: target,
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
+        
+        if (target >= game.config.height * 5/6) target = (game.config.height * 5/6) - 61;
+        this.scene.tweens.add({
+            targets: [this.boxText],
+            y: (target + this.textOffset.y),
+            ease: 'Quad.InOut',
+            duration: 1500,
+        });
 
-            this.scene.tweens.add({
-                targets: this.boxText,
-                y: (target + 75),
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
+        this.scene.tweens.add({
+            targets: [this.image],
+            y: target,
+            ease: 'Quad.InOut',
+            duration: 1500,
+        });
 
-            this.scene.tweens.add({
-                targets: this.oldText,
-                y: (target-65),
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
-
-            this.scene.tweens.add({
-                targets: this.waitArrow,
-                y: (target + this.arrowOffset.y),
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
-
-        } else {
-            if (target >= game.config.height * 5/6) target = (game.config.height * 5/6) - 61;
-            this.scene.tweens.add({
-                targets: [this.boxText],
-                y: (target + this.textOffset.y),
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
-
-            this.scene.tweens.add({
-                targets: [this.image],
-                y: target,
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
-
-            this.scene.tweens.add({
-                targets: this.waitArrow,
-                y: (target + this.arrowOffset.y),
-                ease: 'Quad.InOut',
-                duration: 1500,
-            });
-        }
-
+        this.scene.tweens.add({
+            targets: this.waitArrow,
+            y: (target + this.arrowOffset.y),
+            ease: 'Quad.InOut',
+            duration: 1500,
+        });
+    
         this.y = target
     }
 

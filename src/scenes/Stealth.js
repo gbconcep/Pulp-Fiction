@@ -115,6 +115,7 @@ class Stealth extends Phaser.Scene {
       this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", menuConfig).setOrigin(0.5).setDepth(50);
       this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) for Menu Screen', menuConfig).setOrigin(0.5).setDepth(50);
       this.gameOver = true;
+      this.scene.start('arrestScene');
   
     }, null, this);
 
@@ -206,11 +207,6 @@ class Stealth extends Phaser.Scene {
     if (this.playerCar.y > game.config.height * 7/8) this.playerCar.y = game.config.height* 7/8;
 
 
-   
-    // if (Phaser.Input.Keyboard.JustDown(cursors.space)) {    
-    //   this.scene.start('stealthScene');
-    //   this.sfx.stop()      
-    // }
 
     // colision detection
     this.playerCar.detectionZone.x = this.playerCar.x;
@@ -218,6 +214,7 @@ class Stealth extends Phaser.Scene {
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
   
+    // move all the cars down the screen based on the road speed
     this.templist = this.carGroup.getChildren()
     this.templist.forEach((car) => {
       car.setVelocityY((this.speed * 30) + 30);
@@ -239,18 +236,20 @@ class Stealth extends Phaser.Scene {
     }
   }
 
+  // check collision between player and the opposing car
   carCollision(object1, object2) { 
     if (!this.carDamaged){
+        object2.collide(); // End the scene if the other car was a police car
         object1.y += 100;
         this.carDamaged = true;
         this.damage.play()
-        this.carInvulnerable = this.time.delayedCall(3000, () => {
+        this.carInvulnerable = this.time.delayedCall(3000, () => { //Flash effect to show temp invincibility
             this.carDamaged = false;
             object1.alpha = 1;
         }, null, this);
     }
-    object2.cleanup()
+    object2.cleanup(); // get rid of the other car
     object2.destroy();
-    if (this.speed > 3) this.speed = this.speed/2;      
+    if (this.speed > 3) this.speed = this.speed/2; // Slow down the movement of the game 
   }
 }
