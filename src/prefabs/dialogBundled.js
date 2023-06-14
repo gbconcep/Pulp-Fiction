@@ -27,33 +27,33 @@ class dialogBoxBundle {
         
         // Code for if we want a pointer CLICK to also advance the dialog
 
-        // this.scene.input.on('pointerup', () => {
-        //     this.activeBox.waitArrow.removeFromDisplayList()
-        //     if (this.scene.input.activePointer.upY > 600) 
-        //         if(this.activeBox.DialogToDisplayQ.isEmpty && this.nextInstruction !== 'end')this.cycleScript();
-        //         else if (this.activeBox.finished && this.nextInstruction === 'end') {
-        //             this.lastBoxClicked = true;
-        //             this.activeBox.isTyping = true;
-        //             this.unusable = true;
-        //         }
-        //         else this.activeBox.click()
-        // });
+        /*this.scene.input.on('pointerup', () => {
+            this.activeBox.waitArrow.removeFromDisplayList()
+            if (this.scene.input.activePointer.upY > 600) 
+                if(this.activeBox.DialogToDisplayQ.isEmpty && this.nextInstruction !== 'end')this.cycleScript();
+                else if (this.activeBox.finished && this.nextInstruction === 'end') {
+                    this.lastBoxClicked = true;
+                    this.activeBox.isTyping = true;
+                    this.unusable = true;
+                }
+                else this.activeBox.click()
+        });*/
 
 
         // Code for advancing the dialog boxes with SPACE
 
-        // if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.space)) {
-        //     //console.log("space pressed")              DEBUG COMMENT
-        //     this.activeBox.waitArrow.removeFromDisplayList()
-        //     if (this.activeBox.isTyping) this.activeBox.showTextFlag = true;
-        //         else if(this.activeBox.DialogToDisplayQ.isEmpty && this.nextInstruction !== 'end')this.cycleScript();
-        //         else if (this.activeBox.finished && this.nextInstruction === 'end') {
-        //             this.lastBoxClicked = true;
-        //             this.activeBox.isTyping = true;
-        //             this.unusable = true;
-        //         }
-        //         else this.activeBox.click();
-        // }
+        /*if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.space)) {
+            //console.log("space pressed")              DEBUG COMMENT
+            this.activeBox.waitArrow.removeFromDisplayList()
+            if (this.activeBox.isTyping) this.activeBox.showTextFlag = true;
+                else if(this.activeBox.DialogToDisplayQ.isEmpty && this.nextInstruction !== 'end')this.cycleScript();
+                else if (this.activeBox.finished && this.nextInstruction === 'end') {
+                    this.lastBoxClicked = true;
+                    this.activeBox.isTyping = true;
+                    this.unusable = true;
+                }
+                else this.activeBox.click();
+        }*/
 
         if (this.activeBox.finished) this.cycleScript();
 
@@ -94,9 +94,7 @@ class dialogBoxBundle {
             } else if (this.nextInstruction === 'hide') {  // hide a box
                 this.script[i][1] === 'left' ? this.leftBox.hide() : 
                 (this.script[i][1] === 'right' ? this.rightBox.hide() : false)
-            } else if (this.nextInstruction === 'puzzle') { // start the scene's puzzle when this keyword is found
-                this.scene.puzzleIsActive = true;
-                this.removeAllDialogImages();
+            
             } else if (this.nextInstruction === 'shift') { // shift the boxes to a certain y position on the screen
                 if (this.script[i][1] === 'right') this.rightBox.shift(this.script[i][2]);
                 else if (this.script[i][1] === 'left') this.leftBox.shift(this.script[i][2]);
@@ -110,7 +108,6 @@ class dialogBoxBundle {
 
             } else if (this.nextInstruction === 'pause') { // pause the dialog for a specified ammount of time
                 this.paused = true;
-                //this.scriptIndex++;
                 this.scene.time.delayedCall(this.script[i][1], () => {
                     this.paused = false;
                     this.cycleScript();

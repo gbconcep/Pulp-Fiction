@@ -5,7 +5,7 @@ class Title extends Phaser.Scene {
     
     create() {
 
-        this.logo = this.add.sprite(game.config.width/2, game.config.width/3, 'logo').setOrigin(.5);
+        this.logo = this.add.image(game.config.width/2, game.config.width/3, 'logo').setOrigin(.5);
 
         // menu text configuration
         let menuConfig = {
@@ -38,6 +38,7 @@ class Title extends Phaser.Scene {
         key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
         key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
         key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         
         // show menu text
         menuConfig.backgroundColor = 'cyan';
@@ -65,6 +66,8 @@ class Title extends Phaser.Scene {
             this.scene.start('timeScene');    
         } else if (Phaser.Input.Keyboard.JustDown(key3)) {    
             this.scene.start('stealthScene');    
+        } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) {    
+            this.scene.start('temp');    
         }
     }
 }
