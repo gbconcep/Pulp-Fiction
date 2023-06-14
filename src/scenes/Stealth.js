@@ -5,7 +5,6 @@ class Stealth extends Phaser.Scene {
 
 
   create() {
-
     this.screenFadeing = true;
     // fade scene in from black at start of scene
     this.cam = this.cameras.main.fadeIn(4000, 0, 0, 0, null, this);
@@ -25,8 +24,11 @@ class Stealth extends Phaser.Scene {
     // sound
     this.sfx = this.sound.add('driving');
     this.damage = this.sound.add('damage');
+    this.suspense = this.sound.add('outoflimits');
     this.sfx.setLoop(true);
     this.sfx.play()
+    this.suspense.setLoop(true);
+    this.suspense.play()
 
     // Background Road
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
@@ -235,6 +237,7 @@ class Stealth extends Phaser.Scene {
       this.cam.on('camerafadeoutcomplete', () => {
         this.scene.start('titleScene');
         this.sfx.stop() 
+        this.suspense.stop()
       })   
     }
   }

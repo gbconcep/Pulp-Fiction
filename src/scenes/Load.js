@@ -49,6 +49,9 @@ class Load extends Phaser.Scene {
         this.load.audio('siren', 'siren.wav');
         this.load.audio('damage', 'damage.mp3');
         this.load.audio('failure', 'failure.wav');
+        this.load.audio('surfrider', 'surfrider.mp3');
+        this.load.audio('misirlou', 'misirlou.mp3');
+        this.load.audio('outoflimits', 'outoflimits.mp3')
 
         // text fonts
         this.load.bitmapFont("dialogW", "./fonts/dialogWhite/dialogWhite.png", "./fonts/dialogWhite/dialogWhite.xml");

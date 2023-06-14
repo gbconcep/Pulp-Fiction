@@ -18,8 +18,11 @@ class Time extends Phaser.Scene {
     //sound
     this.sfx = this.sound.add('driving');
     this.damage = this.sound.add('damage');
+    this.rush = this.sound.add('misirlou');
     this.sfx.setLoop(true);
     this.sfx.play()
+    this.rush.setLoop(true);
+    this.rush.play()
 
     //Background Road
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
@@ -216,6 +219,7 @@ class Time extends Phaser.Scene {
       this.cam.on('camerafadeoutcomplete', () => {
         this.scene.start('stealthScene');
         this.sfx.stop() 
+        this.rush.stop()
       })   
     }
   }

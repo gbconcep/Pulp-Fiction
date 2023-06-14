@@ -23,8 +23,11 @@ class Intro extends Phaser.Scene {
     // sound
     this.sfx = this.sound.add('driving');
     this.damage = this.sound.add('damage');
+    this.chill = this.sound.add('surfrider');
     this.sfx.setLoop(true);
     this.sfx.play()
+    this.chill.setLoop(true);
+    this.chill.play()
 
     // background Sprite
     this.road = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'city').setOrigin(0,0).setScale(1.35);
@@ -109,8 +112,8 @@ class Intro extends Phaser.Scene {
       ['right', `VINCENT: It's legal to carry it, which doesnt really matter cause...`],
       ['right', `VINCENT: Get a load of this, if the cops stop you, its illegal for them to search you.`],
       ['right', `VINCENT: Searching you is a right that Amsterdam cops don't have.`],
-      ['left', `JULES: Haha! And that's all there is to it!`],
-      ['right', `VINCENT: You would dig it the most, but you know the craziest thing about Europe?`],
+      ['left', `JULES: Oh man, I'm going! Haha!`],
+      ['right', `VINCENT: You'd dig it the most, but you know the craziest thing about Europe?`],
       ['left', `JULES: What's that?`],
       ['right', `VINCENT: It's the little differences.`],
       ['right', `VINCENT: They have a lot of the same stuff, but they're a little different.`],
@@ -187,7 +190,7 @@ class Intro extends Phaser.Scene {
     //   })     
     // }
 
-    // colision detection
+    // collision detection
     this.playerCar.detectionZone.x = this.playerCar.x;
     this.playerCar.detectionZone.y = this.playerCar.y
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
@@ -211,6 +214,7 @@ class Intro extends Phaser.Scene {
       this.cam.on('camerafadeoutcomplete', () => {
         this.scene.start('timeScene');
         this.sfx.stop() 
+        this.chill.stop()
       })   
     }
   }
