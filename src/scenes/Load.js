@@ -33,7 +33,7 @@ class Load extends Phaser.Scene {
         this.load.image('aquaCar', 'aqua-car.png');
         this.load.image('textbox', 'text-box.png');
         this.load.image('vignette', 'vignette.png');
-        this.load.image('lights', 'Headlights.png');
+        this.load.image('lights', 'Headlights-1.png');
         this.load.image('crash', 'gameOver_crash.png');
         this.load.image('arrest', 'gameOver_arrest.png');
 
