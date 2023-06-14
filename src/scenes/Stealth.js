@@ -118,6 +118,7 @@ class Stealth extends Phaser.Scene {
       this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) for Menu Screen', menuConfig).setOrigin(0.5).setDepth(50);
       this.gameOver = true;
       this.scene.start('arrestScene');
+      this.suspense.stop()
   
     }, null, this);
 
