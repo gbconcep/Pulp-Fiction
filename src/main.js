@@ -20,6 +20,8 @@
 //
 // If you hide the tutorial panels using "SHIFT", dialogue based off of the scene in the actual movie will start playing.
 // This is an example of Phaser's dialogue bundle, in which we also had continue on its own.
+//
+// While normally you start the game using the SPACE bar, you can actually select between the three levels using the 1, 2, and 3 keys.
 // 
 // Sounds:
 // Car driving sound effect taken from Yuarei on Youtube (https://youtu.be/cxMmWIykFd8)
