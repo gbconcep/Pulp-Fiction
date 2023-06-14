@@ -21,13 +21,19 @@
 // If you hide the tutorial panels using "SHIFT", dialogue based off of the scene in the actual movie will start playing.
 // This is an example of Phaser's dialogue bundle, in which we also had continue on its own.
 // 
+// Sounds:
+// Car driving sound effect taken from Yuarei on Youtube (https://youtu.be/cxMmWIykFd8)
 // Police siren sound by guitarguy1985 on Freesound.org
 // Damage sound by qubodup on Freesound.org
 // Game over sound by myfox14 on Freesound.org
 //
+// Music:
 // Surf Rider, written by Bob Bogle, Nole "Nokie" Edwards, Don Wilson and performed by The Lively Ories
 // Misirlou, performed by Dick Dale
 // Out of Limits, written by Michael Gordon and performed by The Marketts
+// (Chose music from the original film's soundtrack as we felt that no other music can fit the vibe of the film.)
+// (However, the tracks chosen don't necessarily coincide with how it's used in the film)
+// (Instead, music was chosen based on if it fit the vibe of the level.)
 
 
 let config = {

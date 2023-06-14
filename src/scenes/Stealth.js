@@ -18,7 +18,7 @@ class Stealth extends Phaser.Scene {
     // hint panel
     this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(101);
     this.tutorialPanel.setScale(2, .7);
-    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nGet to Jimmie's without getting caught!`, 20).setDepth(101).setOrigin(.5)
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`STEALTH: \nGet to Jimmie's without getting caught!\nIf you hit or stay in the range of police too long, you lose`, 20).setDepth(101).setOrigin(.5)
     this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5)
 
     // sound

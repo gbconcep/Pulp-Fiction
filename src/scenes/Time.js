@@ -105,7 +105,7 @@ class Time extends Phaser.Scene {
     // hint panel
     this.tutorialPanel = this.add.sprite(game.config.width/2, game.config.height/1.15, 'textbox').setOrigin(0.5,0.5).setDepth(5);
     this.tutorialPanel.setScale(2, .7);
-    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nAvoid as many cars as you can and get to the apartment!`, 20).setDepth(101).setOrigin(.5).setDepth(5);
+    this.tutorialText = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y, 'dialogW',`INTRO STAGE: \nGet Mia to Lance's before time runs out!\nHitting cars will slow you down.`, 20).setDepth(101).setOrigin(.5).setDepth(5);
     this.tutorialTip = this.add.bitmapText(this.tutorialPanel.x, this.tutorialPanel.y + 50, 'dialogW',`PRESS (SHIFT) TO HIDE/SHOW`, 15).setDepth(101).setOrigin(.5).setDepth(5);
 
     // dialogue
