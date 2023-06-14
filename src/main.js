@@ -20,7 +20,7 @@ This is based off of dialogue where Jules says someone is going to notice the bl
 
 // If you hide the tutorial panels using "SHIFT", dialogue based off of the scene in the actual movie will start playing.
 
-// While normally you start the game using the SPACE bar, you can actually select between the three levels using the 1, 2, and 3 keys.
+// While normally you start the game using the SPACE bar, Graders can actually select between the three levels using the 1, 2, and 3 keys.
 
 
 
