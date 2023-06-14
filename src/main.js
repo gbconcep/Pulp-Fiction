@@ -1,5 +1,9 @@
 // Pulp Fiction
 // Game by Alex Groff and Gavin Concepcion
+// Sounds 
+// Police siren sound by guitarguy1985 on Freesound.org
+// Damage sound by qubodup on Freesound.org
+// Game over sound by myfox14 on Freesound.org
 
 let config = {
   type: Phaser.AUTO,

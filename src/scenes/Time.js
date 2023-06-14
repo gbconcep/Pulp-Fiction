@@ -17,6 +17,7 @@ class Time extends Phaser.Scene {
 
     //sound
     this.sfx = this.sound.add('driving');
+    this.damage = this.sound.add('damage');
     this.sfx.setLoop(true);
     this.sfx.play()
 
@@ -223,6 +224,7 @@ class Time extends Phaser.Scene {
     if (!this.carDamaged){
         object1.y += 100;
         this.carDamaged = true;
+        this.damage.play()
         this.carInvulnerable = this.time.delayedCall(3000, () => {
             this.carDamaged = false;
             object1.alpha = 1;
