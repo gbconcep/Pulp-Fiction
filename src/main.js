@@ -76,7 +76,7 @@ let config = {
           debug: false
       }
   },
-  scene: [Load, Title, Intro, Time, Stealth, Crash, Arrest]
+  scene: [Load, Title, Intro, Time, Stealth, Crash, Arrest, Credits ]
 }
 
 let game = new Phaser.Game(config);

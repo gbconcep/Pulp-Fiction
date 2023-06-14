@@ -67,7 +67,7 @@ class Title extends Phaser.Scene {
         } else if (Phaser.Input.Keyboard.JustDown(key3)) {    
             this.scene.start('stealthScene');    
         } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) {    
-            this.scene.start('temp');    
+            this.scene.start('creditsScene');    
         }
     }
 }
