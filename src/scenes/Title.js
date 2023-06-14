@@ -45,7 +45,7 @@ class Title extends Phaser.Scene {
         menuConfig.color = '#000';
         directionConfig.fixedWidth = 0
 
-        // this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to start', directionConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.25, 'Press C for Credits', directionConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.4, 'Press SPACE to Begin', directionConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height * 2.5/4, 'Use ARROW KEYS to move', directionConfig).setOrigin(0.5);
         // this.add.text(game.config.width/1.4, game.config.height/6.5, 'Press DOWN key to slide', directionConfig).setOrigin(0.5);
