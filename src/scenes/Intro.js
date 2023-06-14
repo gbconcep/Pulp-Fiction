@@ -22,6 +22,7 @@ class Intro extends Phaser.Scene {
 
     // sound
     this.sfx = this.sound.add('driving');
+    this.damage = this.sound.add('damage');
     this.sfx.setLoop(true);
     this.sfx.play()
 
@@ -190,6 +191,7 @@ class Intro extends Phaser.Scene {
     this.playerCar.detectionZone.y = this.playerCar.y
     if (this.carDamaged) this.playerCar.alpha = this.carInvulnerable.elapsed % 1;
     this.physics.add.collider(this.playerCar, this.carGroup, null, this.carCollision, this);
+
     
     this.templist = this.carGroup.getChildren()
     this.templist.forEach((car) => {
@@ -216,6 +218,7 @@ class Intro extends Phaser.Scene {
     if (!this.carDamaged){
         object1.y += 100;
         this.carDamaged = true;
+        this.damage.play()
         this.carInvulnerable = this.time.delayedCall(3000, () => {
             this.carDamaged = false;
             object1.alpha = 1;

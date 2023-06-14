@@ -34,6 +34,8 @@ class Load extends Phaser.Scene {
         this.load.image('textbox', 'text-box.png');
         this.load.image('vignette', 'vignette.png');
         this.load.image('lights', 'Headlights.png');
+        this.load.image('crash', 'gameOver_crash.png');
+        this.load.image('arrest', 'gameOver_arrest.png');
 
         // Dialog Boxes
         this.load.image('dialoguebox', 'dialogue-box.png');
@@ -44,6 +46,8 @@ class Load extends Phaser.Scene {
 
         // audio
         this.load.audio('driving', 'driving.mp3');
+        this.load.audio('siren', 'siren.wav');
+        this.load.audio('damage', 'damage.mp3');
 
         // text fonts
         this.load.bitmapFont("dialogW", "./fonts/dialogWhite/dialogWhite.png", "./fonts/dialogWhite/dialogWhite.xml");
