@@ -35,7 +35,9 @@ class Police extends Car {
 
         this.detectionLevel <= 0 ? false : this.detectionLevel--;
 
-        if(this.foundPlayer) this.scene.scene.start('titleScene');
+        if(this.foundPlayer) {
+            this.collide();
+        }
 
         if (this.playerZone != null) this.isOverlapping(this.playerZone);
 
@@ -58,7 +60,8 @@ class Police extends Car {
     }
     
     collide() { // On collision with the player, Arrest them immidiately
-        //this.scene.scene.start('temp');
+        this.scene.sfx.stop();
+        this.scene.scene.start('arrestScene');
     }
 
     cleanup() { // clear the graphics engine so when the car is deleted, the detection ring dissapears too

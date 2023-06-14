@@ -1,10 +1,8 @@
 class dialogBoxBundle {
     constructor(scene, script, inFocus = false, leftAsset = null, rightAsset = null, centerAsset = null){
         this.scene = scene;
-        this.centerBox = new Dialog(scene, 'center', 20, inFocus, '', centerAsset);
         this.rightBox = new Dialog(scene, 'right', 20, inFocus, '', rightAsset);
         this.leftBox = new Dialog(scene, 'left', 20, inFocus, '', leftAsset);
-        this.centerBox.hide(true);
         this.leftBox.hide(true);
         this.rightBox.hide(true);
 
@@ -87,14 +85,6 @@ class dialogBoxBundle {
                 this.activeBox = this.rightBox;
                 this.activeBox.addText(this.script[i][1])
 
-            } else if (this.nextInstruction === 'center') { // center is our next dialog sequence
-                currentBox = 'center'; 
-                this.leftBox.hide()
-                this.rightBox.hide()
-                boxChosen = true;
-                this.activeBox = this.centerBox;
-                this.activeBox.addText(this.script[i][1])
-
             } else if (this.nextInstruction === 'sound') { // make noise
                 // PLAY THE SOUND AT THE FILE PATH
                 console.log('sfx: ', this.script[i][1]);
@@ -103,16 +93,13 @@ class dialogBoxBundle {
 
             } else if (this.nextInstruction === 'hide') {  // hide a box
                 this.script[i][1] === 'left' ? this.leftBox.hide() : 
-                (this.script[i][1] === 'right' ? this.rightBox.hide() : 
-                (this.script[i][1] === 'center' ? this.centerBox.hide() : false))
-
+                (this.script[i][1] === 'right' ? this.rightBox.hide() : false)
             } else if (this.nextInstruction === 'puzzle') { // start the scene's puzzle when this keyword is found
                 this.scene.puzzleIsActive = true;
                 this.removeAllDialogImages();
             } else if (this.nextInstruction === 'shift') { // shift the boxes to a certain y position on the screen
                 if (this.script[i][1] === 'right') this.rightBox.shift(this.script[i][2]);
                 else if (this.script[i][1] === 'left') this.leftBox.shift(this.script[i][2]);
-                else if (this.script[i][1] === 'center') this.centerBox.shift(this.script[i][2]);
                 else this.shiftFocus(this.script[i][1]);
 
             } else if (this.nextInstruction === 'image') { // load an image onto the screen with the given key
@@ -151,7 +138,6 @@ class dialogBoxBundle {
 
         this.leftBox.shift(targetY);
         this.rightBox.shift(targetY);
-        this.centerBox.shift(targetY);
         
     }
 
@@ -185,16 +171,10 @@ class dialogBoxBundle {
             this.rightBox.image.removeFromDisplayList();
             this.rightBox.boxText.removeFromDisplayList();
             this.rightBox.waitArrow.removeFromDisplayList();
-
-            this.centerBox.image.removeFromDisplayList();
-            this.centerBox.boxText.removeFromDisplayList();
-            this.centerBox.waitArrow.removeFromDisplayList();
-            this.centerBox.oldText.removeFromDisplayList();
         }
 
         if (!(this.leftBox.isHidden === true || this.leftBox.alpha === 0)) this.leftBox.hide(instantly)
         if (!(this.rightBox.isHidden === true || this.rightBox.alpha === 0))this.rightBox.hide(instantly)
-        if (!(this.centerBox.isHidden === true || this.centerBox.alpha === 0))this.centerBox.hide(instantly)
         
         this.unusable = true;
     }
