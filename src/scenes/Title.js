@@ -52,7 +52,7 @@ class Title extends Phaser.Scene {
 
         this.add.text(game.config.width/2, 500, `Game by Alex Groff and Gavin Concepcion`).setOrigin(.5);
 
-        this.add.text(game.config.width/2, 520, `Music and sound effects from Freesound.org`, {
+        this.add.text(game.config.width/2, 520, `Based on the 1994 Tarantino film`, {
             fontFamily: 'Courier',
             fontSize: '15px',
             color: '#ffffff'
